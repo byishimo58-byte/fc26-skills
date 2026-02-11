@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FC26 Skills Guide</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; color: #222; }
-    header { background: #ff4500; color: white; padding: 20px; text-align: center; }
-    h1 { margin: 0; }
-    .category { display: flex; flex-wrap: wrap; background: #fff; margin: 20px; padding: 20px; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
-    .skills { flex: 1; min-width: 300px; }
-    .skills ul { list-style: none; padding-left: 0; }
-    .skills li { margin: 10px 0; }
-    .video { flex: 1; min-width: 300px; padding-left: 20px; }
-    iframe { width: 100%; height: 315px; border: none; border-radius: 10px; }
-    .combo { background: #eee; padding: 3px 6px; border-radius: 4px; font-weight: bold; margin-left: 5px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FC26 Skills Guide</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; color: #222; }
+  header { background: #ff4500; color: white; padding: 20px; text-align: center; }
+  h1 { margin: 0; }
+  .category { display: flex; flex-wrap: wrap; background: #fff; margin: 20px; padding: 20px; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
+  .skills { flex: 1; min-width: 300px; }
+  .skills ul { list-style: none; padding-left: 0; }
+  .skills li { margin: 10px 0; line-height: 1.5em; }
+  .video { flex: 1; min-width: 300px; padding-left: 20px; }
+  iframe { width: 100%; height: 315px; border: none; border-radius: 10px; }
+  .button { display: inline-block; background: #eee; padding: 5px 8px; margin: 0 2px; border-radius: 5px; font-weight: bold; font-family: monospace; }
+</style>
 </head>
 <body>
 
@@ -25,15 +25,19 @@
 
 <main>
 
-<!-- Example Category -->
+<!-- Dribbling Category -->
 <div class="category">
   <div class="skills">
     <h2>Dribbling Skills</h2>
     <ul>
-      <li>Rainbow Flick <span class="combo">R1 + Forward + O</span></li>
-      <li>Stepovers <span class="combo">R1 + Right Stick</span></li>
-      <li>Ball Roll <span class="combo">Right Stick Forward</span></li>
-      <li>Heel Flick <span class="combo">R1 + O + Left Stick</span></li>
+      <li>Rainbow Flick <span class="button">R1</span><span class="button">Forward</span><span class="button">O</span> – Beat defenders 1v1</li>
+      <li>Stepovers <span class="button">R1</span><span class="button">Right Stick</span> – Fake moves to confuse opponents</li>
+      <li>Ball Roll <span class="button">Right Stick</span><span class="button">Forward</span> – Controlled dribble</li>
+      <li>Heel Flick <span class="button">R1</span><span class="button">O</span><span class="button">Left Stick</span> – Escape tight marking</li>
+      <li>Roulette / 360 Spin <span class="button">Right Stick</span><span class="button">Rotate</span> – Advanced bypass</li>
+      <li>Drag Back Flick <span class="button">R2</span><span class="button">Left Stick Down</span> – Move out of space</li>
+      <li>Body Feint <span class="button">Left Stick Left/Right</span> – Fake defender direction</li>
+      <!-- Add remaining dribbling skills here -->
     </ul>
   </div>
   <div class="video">
@@ -41,14 +45,16 @@
   </div>
 </div>
 
-<!-- Another Category -->
+<!-- Attacking Category -->
 <div class="category">
   <div class="skills">
     <h2>Attacking Skills</h2>
     <ul>
-      <li>Chip Goal <span class="combo">L1 + O</span></li>
-      <li>Finesse Shot <span class="combo">R1 + O</span></li>
-      <li>Body Feint <span class="combo">Left Stick Left/Right</span></li>
+      <li>Chip Goal <span class="button">L1</span><span class="button">O</span> – Lift the ball over the keeper</li>
+      <li>Finesse Shot <span class="button">R1</span><span class="button">O</span> – Curved accurate shot</li>
+      <li>Fake Pass <span class="button">Square</span><span class="button">X</span> – Trick defenders</li>
+      <li>Body Feint Shot <span class="button">Left Stick</span><span class="button">Right</span><span class="button">O</span> – Mislead goalkeeper</li>
+      <!-- Add remaining attacking skills here -->
     </ul>
   </div>
   <div class="video">
@@ -56,10 +62,57 @@
   </div>
 </div>
 
-<!-- Defending, Goalkeeping, Hidden Skills follow same structure -->
-<!-- Replace VALID_XXXX_VIDEO with the real YouTube URLs -->
+<!-- Defending Category -->
+<div class="category">
+  <div class="skills">
+    <h2>Defending Skills</h2>
+    <ul>
+      <li>Standing Tackle <span class="button">O</span> – Stop attacker</li>
+      <li>Slide Tackle <span class="button">Square</span> – Time it perfectly</li>
+      <li>Jockey <span class="button">L2</span> – Control space</li>
+      <li>Push/Pull <span class="button">R1</span> – Unbalance attacker</li>
+      <li>Intercept <span class="button">Triangle</span> – Read passes early</li>
+      <!-- Add remaining defending skills here -->
+    </ul>
+  </div>
+  <div class="video">
+    <iframe src="https://www.youtube.com/embed/VALID_DEFENDING_VIDEO" title="Defending Skills Tutorial" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- Goalkeeping Category -->
+<div class="category">
+  <div class="skills">
+    <h2>Goalkeeping Skills</h2>
+    <ul>
+      <li>Diving Save <span class="button">Right Stick + O</span> – Position keeper correctly</li>
+      <li>One-on-One <span class="button">L1</span><span class="button">O</span> – Anticipate shooter</li>
+      <li>Goal Kick <span class="button">Circle</span> – Long accurate pass</li>
+      <li>Quick Throw <span class="button">Triangle</span> – Start counter attack</li>
+      <!-- Add remaining goalkeeping skills here -->
+    </ul>
+  </div>
+  <div class="video">
+    <iframe src="https://www.youtube.com/embed/VALID_GOALKEEPING_VIDEO" title="Goalkeeping Skills Tutorial" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- Hidden / Rare Skills Category -->
+<div class="category">
+  <div class="skills">
+    <h2>Hidden / Rare Skills</h2>
+    <ul>
+      <li>Drag Back Elastico <span class="button">R1</span><span class="button">L2</span><span class="button">Right Stick</span> – Confuse advanced players</li>
+      <li>Double Rainbow Flick <span class="button">R1</span><span class="button">Forward + O x2</span> – Ultra rare move</li>
+      <li>Heel Chop <span class="button">Right Stick + L1 + O</span> – Escape tight marking</li>
+      <!-- Add remaining hidden skills here -->
+    </ul>
+  </div>
+  <div class="video">
+    <iframe src="https://www.youtube.com/embed/VALID_HIDDEN_VIDEO" title="Hidden Skills Tutorial" allowfullscreen></iframe>
+  </div>
+</div>
 
 </main>
-
 </body>
 </html>
