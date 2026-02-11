@@ -1,27 +1,35 @@
 [
   {
+    "name": "Rainbow Flick",
+    "category": "dribbling",
+    "ps": "R Stick ↑ then ↑",
+    "xbox": "R Stick ↑ then ↑",
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "Beat 1v1 defenders with style."
+  },
+  {
     "name": "Elastico",
-    "category": "attacking",
+    "category": "dribbling",
     "ps": "R Stick → then ←",
     "xbox": "R Stick → then ←",
-    "video": "https://www.youtube.com/embed/80K5xp90t-A",
-    "tip": "Use to quickly beat 1v1 defenders."
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "Quick change of direction to beat defenders."
   },
   {
     "name": "Reverse Elastico",
-    "category": "attacking",
+    "category": "dribbling",
     "ps": "R Stick ← then →",
     "xbox": "R Stick ← then →",
-    "video": "https://www.youtube.com/embed/80K5xp90t-A",
-    "tip": "Advanced move to confuse defenders."
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "Reverse direction to confuse opponents."
   },
   {
-    "name": "Heel Flick",
-    "category": "attacking",
-    "ps": "R Stick ↑ then ↓",
-    "xbox": "R Stick ↑ then ↓",
-    "video": "https://www.youtube.com/embed/80K5xp90t-A",
-    "tip": "Surprise your opponent with quick heel flick."
+    "name": "Stepovers",
+    "category": "dribbling",
+    "ps": "R Stick circular motion",
+    "xbox": "R Stick circular motion",
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "Fake moves to confuse defenders."
   },
   {
     "name": "Ball Roll",
@@ -29,7 +37,7 @@
     "ps": "R Stick →",
     "xbox": "R Stick →",
     "video": "https://www.youtube.com/embed/8WAlt19IUKM",
-    "tip": "Control your dribble and reposition quickly."
+    "tip": "Keep close control while moving."
   },
   {
     "name": "Drag Back Flick",
@@ -37,7 +45,63 @@
     "ps": "L2 + R Stick ↓",
     "xbox": "LT + R Stick ↓",
     "video": "https://www.youtube.com/embed/8WAlt19IUKM",
-    "tip": "Escape tight spaces with this move."
+    "tip": "Escape tight spaces and turn quickly."
+  },
+  {
+    "name": "Body Feint Right",
+    "category": "dribbling",
+    "ps": "R Stick →",
+    "xbox": "R Stick →",
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "Shift defender balance then go opposite."
+  },
+  {
+    "name": "Body Feint Left",
+    "category": "dribbling",
+    "ps": "R Stick ←",
+    "xbox": "R Stick ←",
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "Pull defender the wrong way."
+  },
+  {
+    "name": "Heel Flick",
+    "category": "dribbling",
+    "ps": "R Stick ↑ then ↓",
+    "xbox": "R Stick ↑ then ↓",
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "Lift the ball to beat close marking."
+  },
+  {
+    "name": "Heel Chop",
+    "category": "dribbling",
+    "ps": "R Stick ↓ then ↑",
+    "xbox": "R Stick ↓ then ↑",
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "Sudden direction change move."
+  },
+  {
+    "name": "Roulette",
+    "category": "dribbling",
+    "ps": "R Stick Rotate",
+    "xbox": "R Stick Rotate",
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "Spin past multiple defenders."
+  },
+  {
+    "name": "Tornado Spin",
+    "category": "dribbling",
+    "ps": "R Stick Rotate faster",
+    "xbox": "R Stick Rotate faster",
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "High level spin trick."
+  },
+  {
+    "name": "Directional Nutmeg",
+    "category": "dribbling",
+    "ps": "Hold L1 + R Stick →",
+    "xbox": "Hold LB + R Stick →",
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "Play the ball through defender’s legs."
   },
   {
     "name": "Standing Tackle",
@@ -45,7 +109,7 @@
     "ps": "O + Direction",
     "xbox": "B + Direction",
     "video": "https://www.youtube.com/embed/VvCnELF7McI",
-    "tip": "Stop the opponent by timing correctly."
+    "tip": "Time the tackle to win the ball."
   },
   {
     "name": "Slide Tackle",
@@ -53,7 +117,31 @@
     "ps": "Square + Direction",
     "xbox": "X + Direction",
     "video": "https://www.youtube.com/embed/VvCnELF7McI",
-    "tip": "Stop dangerous attacks, watch timing."
+    "tip": "Risky but can stop dangerous attacks."
+  },
+  {
+    "name": "Jockey",
+    "category": "defending",
+    "ps": "L2 + Direction",
+    "xbox": "LT + Direction",
+    "video": "https://www.youtube.com/embed/VvCnELF7McI",
+    "tip": "Stay balanced and block paths."
+  },
+  {
+    "name": "Intercept",
+    "category": "defending",
+    "ps": "O while running",
+    "xbox": "B while running",
+    "video": "https://www.youtube.com/embed/VvCnELF7McI",
+    "tip": "Cut the opponent’s passes."
+  },
+  {
+    "name": "Push & Pull",
+    "category": "defending",
+    "ps": "L2 + O",
+    "xbox": "LT + B",
+    "video": "https://www.youtube.com/embed/VvCnELF7McI",
+    "tip": "Unbalance attackers."
   },
   {
     "name": "Chip Shot",
@@ -61,7 +149,7 @@
     "ps": "L1 + 🅾️",
     "xbox": "LB + B",
     "video": "https://www.youtube.com/embed/Qd7xDgpkZb4",
-    "tip": "Lift the ball over the keeper."
+    "tip": "Lift the ball over keeper."
   },
   {
     "name": "Finesse Shot",
@@ -69,7 +157,31 @@
     "ps": "R1 + 🅾️",
     "xbox": "RB + B",
     "video": "https://www.youtube.com/embed/Qd7xDgpkZb4",
-    "tip": "Curved precision shots near the goal."
+    "tip": "Curved precise shots."
+  },
+  {
+    "name": "Fake Shot",
+    "category": "special",
+    "ps": "🅾️ then ✖️",
+    "xbox": "B then A",
+    "video": "https://www.youtube.com/embed/Qd7xDgpkZb4",
+    "tip": "Feint before shoot or pass."
+  },
+  {
+    "name": "Power Shot",
+    "category": "special",
+    "ps": "L1 + R1 + 🅾️",
+    "xbox": "LB + RB + B",
+    "video": "https://www.youtube.com/embed/Qd7xDgpkZb4",
+    "tip": "Extra powerful shots."
+  },
+  {
+    "name": "Driven Pass",
+    "category": "special",
+    "ps": "L1 + R1 + △",
+    "xbox": "LB + RB + Y",
+    "video": "https://www.youtube.com/embed/Qd7xDgpkZb4",
+    "tip": "Hard accurate passes."
   },
   {
     "name": "Goalkeeper Quick Throw",
@@ -77,6 +189,54 @@
     "ps": "Triangle + Direction",
     "xbox": "Y + Direction",
     "video": "https://www.youtube.com/embed/K1QYx1rAa_Q",
-    "tip": "Start fast counterattacks from keeper."
+    "tip": "Start a fast counterattack."
+  },
+  {
+    "name": "Goalkeeper Dive Save",
+    "category": "goalkeeping",
+    "ps": "Square near ball",
+    "xbox": "X near ball",
+    "video": "https://www.youtube.com/embed/K1QYx1rAa_Q",
+    "tip": "Stop strong shots on goal."
+  },
+  {
+    "name": "Goalkeeper Punch",
+    "category": "goalkeeping",
+    "ps": "Triangle far from ball",
+    "xbox": "Y far from ball",
+    "video": "https://www.youtube.com/embed/K1QYx1rAa_Q",
+    "tip": "Clear dangerous crosses."
+  },
+  {
+    "name": "One-on-One Save",
+    "category": "goalkeeping",
+    "ps": "Stay on feet + O",
+    "xbox": "Stay on feet + B",
+    "video": "https://www.youtube.com/embed/K1QYx1rAa_Q",
+    "tip": "Anticipate shooter timing."
+  },
+  {
+    "name": "Drag Back Elastico",
+    "category": "hidden",
+    "ps": "L2 + R Stick ↓ then ←",
+    "xbox": "LT + R Stick ↓ then ←",
+    "video": "https://www.youtube.com/embed/9g3dHkT8U8I",
+    "tip": "Advanced hidden move."
+  },
+  {
+    "name": "Reverse Rainbow Flick",
+    "category": "hidden",
+    "ps": "R Stick ↓ then ↑ then ↑",
+    "xbox": "R Stick ↓ then ↑ then ↑",
+    "video": "https://www.youtube.com/embed/9g3dHkT8U8I",
+    "tip": "Rare skill to beat defenders."
+  },
+  {
+    "name": "Double Rainbow Flick",
+    "category": "hidden",
+    "ps": "R Stick ↑ ↑ ↑",
+    "xbox": "R Stick ↑ ↑ ↑",
+    "video": "https://www.youtube.com/embed/9g3dHkT8U8I",
+    "tip": "Ultra rare skill for high level."
   }
 ]
