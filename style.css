@@ -1,4 +1,4 @@
-/* General Body */
+/* --- GENERAL BODY --- */
 body {
   font-family: Arial, sans-serif;
   background: #0d0d0d;
@@ -7,13 +7,14 @@ body {
   text-align: center;
 }
 
-/* Navbar */
+/* --- NAVBAR --- */
 nav {
   background: #111;
-  padding: 15px;
+  padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 nav h1 {
   color: #00ff88;
@@ -38,7 +39,7 @@ nav ul li a:hover {
   color: #ff8c00;
 }
 
-/* Hero Section */
+/* --- HERO --- */
 .hero {
   background: #111;
   padding: 50px 20px;
@@ -65,7 +66,7 @@ nav ul li a:hover {
   color: #fff;
 }
 
-/* Section & Cards */
+/* --- SECTIONS & CARDS --- */
 .section {
   margin: 30px auto;
   width: 90%;
@@ -75,6 +76,7 @@ nav ul li a:hover {
 .section h3 {
   color: #ff8c00;
   margin-bottom: 10px;
+  font-size: 24px;
 }
 .card {
   background: #1a1a1a;
@@ -84,21 +86,26 @@ nav ul li a:hover {
   box-shadow: 0 0 10px #00ff88;
 }
 
-/* Controller Buttons */
+/* --- CONTROLLER BUTTONS --- */
 .controller-btn {
   display: inline-block;
-  padding: 6px 12px;
-  margin: 2px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 3px;
   background: #222;
   color: #00ff88;
   border: 2px solid #00ff88;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: bold;
+  text-align: center;
   font-family: monospace;
-  font-size: 14px;
+  box-shadow: 0 0 5px #00ff88;
 }
+.controller-btn.ps { background: #111; color: #00ff88; }
+.controller-btn.xbox { background: #111; color: #ff8c00; }
 
-/* Watch Video Button */
+/* --- WATCH VIDEO BUTTON --- */
 .button {
   display: inline-block;
   padding: 8px 16px;
