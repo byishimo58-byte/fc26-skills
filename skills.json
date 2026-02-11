@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Elastico",
+    "category": "attacking",
+    "ps": "R Stick → then ←",
+    "xbox": "R Stick → then ←",
+    "video": "https://www.youtube.com/embed/80K5xp90t-A",
+    "tip": "Use to quickly beat 1v1 defenders."
+  },
+  {
+    "name": "Reverse Elastico",
+    "category": "attacking",
+    "ps": "R Stick ← then →",
+    "xbox": "R Stick ← then →",
+    "video": "https://www.youtube.com/embed/80K5xp90t-A",
+    "tip": "Advanced move to confuse defenders."
+  },
+  {
+    "name": "Heel Flick",
+    "category": "attacking",
+    "ps": "R Stick ↑ then ↓",
+    "xbox": "R Stick ↑ then ↓",
+    "video": "https://www.youtube.com/embed/80K5xp90t-A",
+    "tip": "Surprise your opponent with quick heel flick."
+  },
+  {
+    "name": "Ball Roll",
+    "category": "dribbling",
+    "ps": "R Stick →",
+    "xbox": "R Stick →",
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "Control your dribble and reposition quickly."
+  },
+  {
+    "name": "Drag Back Flick",
+    "category": "dribbling",
+    "ps": "L2 + R Stick ↓",
+    "xbox": "LT + R Stick ↓",
+    "video": "https://www.youtube.com/embed/8WAlt19IUKM",
+    "tip": "Escape tight spaces with this move."
+  },
+  {
+    "name": "Standing Tackle",
+    "category": "defending",
+    "ps": "O + Direction",
+    "xbox": "B + Direction",
+    "video": "https://www.youtube.com/embed/VvCnELF7McI",
+    "tip": "Stop the opponent by timing correctly."
+  },
+  {
+    "name": "Slide Tackle",
+    "category": "defending",
+    "ps": "Square + Direction",
+    "xbox": "X + Direction",
+    "video": "https://www.youtube.com/embed/VvCnELF7McI",
+    "tip": "Stop dangerous attacks, watch timing."
+  },
+  {
+    "name": "Chip Shot",
+    "category": "special",
+    "ps": "L1 + 🅾️",
+    "xbox": "LB + B",
+    "video": "https://www.youtube.com/embed/Qd7xDgpkZb4",
+    "tip": "Lift the ball over the keeper."
+  },
+  {
+    "name": "Finesse Shot",
+    "category": "special",
+    "ps": "R1 + 🅾️",
+    "xbox": "RB + B",
+    "video": "https://www.youtube.com/embed/Qd7xDgpkZb4",
+    "tip": "Curved precision shots near the goal."
+  },
+  {
+    "name": "Goalkeeper Quick Throw",
+    "category": "goalkeeping",
+    "ps": "Triangle + Direction",
+    "xbox": "Y + Direction",
+    "video": "https://www.youtube.com/embed/K1QYx1rAa_Q",
+    "tip": "Start fast counterattacks from keeper."
+  }
+]
