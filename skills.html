@@ -1,144 +1,167 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FC26 All 150 Skills</title>
-
+<title>FC26 Ultimate Skills & Mechanics Library</title>
 <style>
-body{
-    margin:0;
-    font-family:Arial;
-    background:#0f0f0f;
-    color:white;
-}
-header{
-    text-align:center;
-    padding:20px;
-    background:black;
-}
-select{
-    padding:8px;
-    font-size:16px;
-}
-.section{
-    padding:30px;
-    border-bottom:1px solid #333;
-}
-.skill{
-    background:#1a1a1a;
-    padding:12px;
-    margin:6px 0;
-    border-radius:8px;
-}
-.controller{
-    display:inline-block;
-    background:#222;
-    padding:4px 8px;
-    margin-left:10px;
-    border-radius:6px;
-    color:#00ffcc;
-    font-weight:bold;
-}
-iframe{
-    width:100%;
-    height:260px;
-    margin-top:20px;
-}
+/* ----------------- GLOBAL ----------------- */
+body {margin:0;font-family:Arial,sans-serif;background:#0f172a;color:white;}
+header{background:#111827;padding:25px;text-align:center;}
+h1{margin:0;font-size:28px;color:#38bdf8;}
+.controls{margin-top:15px;}
+button{padding:8px 15px;margin:5px;border:none;border-radius:6px;cursor:pointer;font-weight:bold;}
+#psBtn{background:#2563eb;color:white;}
+#xboxBtn{background:#16a34a;color:white;}
+input{padding:8px;width:280px;border-radius:6px;border:none;margin-top:10px;}
+
+/* ----------------- SKILL CARDS ----------------- */
+.section{padding:25px;border-bottom:1px solid #1f2937;}
+.section h2{color:#38bdf8;}
+.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px;}
+.skill{background:#1e293b;padding:14px;border-radius:8px;transition:0.3s;}
+.skill:hover{transform:scale(1.03);}
+.btn{display:inline-block;padding:5px 8px;margin:2px;border-radius:6px;background:#374151;font-size:14px;font-weight:bold;}
+.star{color:#facc15;margin-left:4px;}
+
+/* ----------------- VIDEO ----------------- */
+.video{margin-top:22px;}
+iframe{width:100%;height:300px;border-radius:10px;border:none;}
+
+/* ----------------- CONTROLLER IMAGE ----------------- */
+.controller-diagram{margin:20px auto;width:80%;text-align:center;}
+.controller-diagram img{width:100%;max-width:600px;border-radius:12px;box-shadow:0 0 15px rgba(0,0,0,0.5);}
+.controller-labels{margin-top:10px;font-size:14px;color:#94a3b8;}
 </style>
-
-<script>
-let controller = "ps";
-
-function changeController(value){
-    controller = value;
-    render();
-}
-
-const categories = {
-"🔥 Dribbling (50)":50,
-"⚡ Shooting (30)":30,
-"🎯 Passing (25)":25,
-"🛡 Defending (25)":25,
-"⭐ Special & Hidden (20)":20
-};
-
-const combosPS = [
-"L1 + ⭕","L2 + ⭕","L1 + L2 + 🔺","R1 + 🔼",
-"L2 + RS ➡️","L2 + RS ⬅️",
-"RS ⬆️⬇️","RS ➡️⬅️",
-"L1 + R1 + ⬛",
-"R2 + ❌"
-];
-
-const combosXbox = [
-"LB + B","LT + B","LB + LT + Y","RB + Y",
-"LT + RS ➡️","LT + RS ⬅️",
-"RS ⬆️⬇️","RS ➡️⬅️",
-"LB + RB + X",
-"RT + A"
-];
-
-function render(){
-    const container = document.getElementById("content");
-    container.innerHTML = "";
-
-    Object.keys(categories).forEach(cat=>{
-        let section = document.createElement("div");
-        section.className="section";
-
-        let title = document.createElement("h2");
-        title.innerText = cat;
-        section.appendChild(title);
-
-        for(let i=1;i<=categories[cat];i++){
-            let skill = document.createElement("div");
-            skill.className="skill";
-
-            let combo = controller==="ps" ?
-            combosPS[i % combosPS.length] :
-            combosXbox[i % combosXbox.length];
-
-            skill.innerHTML = "Skill Move " + i +
-            "<span class='controller'>" + combo + "</span>";
-
-            section.appendChild(skill);
-        }
-
-        let video = document.createElement("iframe");
-
-        if(cat.includes("Dribbling"))
-            video.src="https://www.youtube.com/embed?listType=search&list=FC26 dribbling tutorial";
-        if(cat.includes("Shooting"))
-            video.src="https://www.youtube.com/embed?listType=search&list=FC26 shooting tutorial";
-        if(cat.includes("Passing"))
-            video.src="https://www.youtube.com/embed?listType=search&list=FC26 passing tutorial";
-        if(cat.includes("Defending"))
-            video.src="https://www.youtube.com/embed?listType=search&list=FC26 defending tutorial";
-        if(cat.includes("Special"))
-            video.src="https://www.youtube.com/embed?listType=search&list=FC26 hidden mechanics tutorial";
-
-        section.appendChild(video);
-        container.appendChild(section);
-    });
-}
-
-window.onload = render;
-</script>
 </head>
-
 <body>
 
 <header>
-<h1>⚽ FC26 COMPLETE 150 SKILLS GUIDE</h1>
-<p>Select Controller</p>
-<select onchange="changeController(this.value)">
-<option value="ps">PlayStation</option>
-<option value="xbox">Xbox</option>
-</select>
+<h1>⚽ FC26 Ultimate Skills & Mechanics Library</h1>
+<div class="controls">
+<button id="psBtn" onclick="setConsole('ps')">PlayStation</button>
+<button id="xboxBtn" onclick="setConsole('xbox')">Xbox</button>
+<br>
+<input type="text" id="searchInput" placeholder="Search skills..." oninput="renderSkills()">
+</div>
+<div id="google_translate_element" style="margin-top:15px;"></div>
 </header>
+
+<!-- Optional: Controller diagram -->
+<div class="controller-diagram">
+<img src="https://i.imgur.com/yourControllerImage.png" alt="Controller Diagram">
+<div class="controller-labels">L1 L2 R1 R2 LS RS 🔼 🟨 ⭕ ✖️ / Y X B A</div>
+</div>
 
 <div id="content"></div>
 
+<script>
+// ----------------- CONSOLE TOGGLE -----------------
+let consoleType = "ps";
+function setConsole(type){consoleType=type;renderSkills();}
+
+// ----------------- SKILL DATA -----------------
+const actions=[
+/* ----------------- DRIBBLING (50) ----------------- */
+{cat:"Dribbling",name:"Elastico",ps:["RS → ←"],xbox:["RS → ←"],stars:5},
+{cat:"Dribbling",name:"Reverse Elastico",ps:["RS ← →"],xbox:["RS ← →"],stars:5},
+{cat:"Dribbling",name:"Ball Roll",ps:["RS →"],xbox:["RS →"],stars:3},
+{cat:"Dribbling",name:"Heel Flick",ps:["RS ↑ ↓"],xbox:["RS ↑ ↓"],stars:4},
+{cat:"Dribbling",name:"Heel Chop",ps:["L2 + RS ↓ ↑"],xbox:["LT + RS ↓ ↑"],stars:5},
+{cat:"Dribbling",name:"Rainbow Flick",ps:["RS ↓ ↑ ↑"],xbox:["RS ↓ ↑ ↑"],stars:5},
+{cat:"Dribbling",name:"Stepovers Single",ps:["RS ◯"],xbox:["RS B"],stars:3},
+{cat:"Dribbling",name:"Stepovers Double",ps:["RS ◯ ◯"],xbox:["RS B B"],stars:3},
+{cat:"Dribbling",name:"McGeady Spin",ps:["RS → ↺"],xbox:["RS → ↺"],stars:4},
+{cat:"Dribbling",name:"La Croqueta",ps:["L1 + RS ← →"],xbox:["LB + RS ← →"],stars:4},
+{cat:"Dribbling",name:"Directional Nutmeg",ps:["R1 + RS →"],xbox:["RB + RS →"],stars:5},
+{cat:"Dribbling",name:"Scoop Turn",ps:["L2 + ❌"],xbox:["LT + B"],stars:5},
+{cat:"Dribbling",name:"Fake Shot Stop",ps:["❌ then ✖️"],xbox:["A then B"],stars:5},
+{cat:"Dribbling",name:"Drag Back",ps:["R2 + RS ↓"],xbox:["RT + RS ↓"],stars:4},
+{cat:"Dribbling",name:"Agile Dribble",ps:["R1"],xbox:["RB"],stars:3},
+{cat:"Dribbling",name:"Strafe Dribble",ps:["L1"],xbox:["LB"],stars:2},
+{cat:"Dribbling",name:"Reverse Ball Roll",ps:["RS ←"],xbox:["RS ←"],stars:3},
+{cat:"Dribbling",name:"Quick Turn",ps:["RS ↻"],xbox:["RS ↻"],stars:4},
+{cat:"Dribbling",name:"Shield Jockey",ps:["L2"],xbox:["LT"],stars:3},
+{cat:"Dribbling",name:"Feint Left",ps:["RS ←"],xbox:["RS ←"],stars:2},
+{cat:"Dribbling",name:"Feint Right",ps:["RS →"],xbox:["RS →"],stars:2},
+// ... add remaining dribbling moves to reach 50 ...
+
+/* ----------------- SHOOTING (30) ----------------- */
+{cat:"Shooting",name:"Chip Shot",ps:["L1 + ⭕"],xbox:["LB + B"],stars:4},
+{cat:"Shooting",name:"Finesse Shot",ps:["R1 + ⭕"],xbox:["RB + B"],stars:4},
+{cat:"Shooting",name:"Power Shot",ps:["L1 + R1 + ⭕"],xbox:["LB + RB + B"],stars:5},
+{cat:"Shooting",name:"Low Driven Shot",ps:["⭕ ⭕"],xbox:["B B"],stars:3},
+{cat:"Shooting",name:"Timed Finish",ps:["⭕ then ⭕ (timed)"],xbox:["B then B (timed)"],stars:5},
+{cat:"Shooting",name:"Volley",ps:["⭕ in air"],xbox:["B in air"],stars:4},
+{cat:"Shooting",name:"Header",ps:["⭕ (header)"],xbox:["B (header)"],stars:4},
+// ... add remaining shooting to reach 30 ...
+
+/* ----------------- PASSING (25) ----------------- */
+{cat:"Passing",name:"Ground Pass",ps:["❌"],xbox:["A"],stars:2},
+{cat:"Passing",name:"Through Ball",ps:["🔼"],xbox:["Y"],stars:3},
+{cat:"Passing",name:"Lob Pass",ps:["🟨"],xbox:["X"],stars:3},
+{cat:"Passing",name:"Driven Pass",ps:["R1 + ❌"],xbox:["RB + A"],stars:4},
+{cat:"Passing",name:"Driven Through Ball",ps:["R1 + 🔼"],xbox:["RB + Y"],stars:4},
+// ... add remaining passing ...
+
+/* ----------------- DEFENDING (25) ----------------- */
+{cat:"Defending",name:"Standing Tackle",ps:["⭕"],xbox:["B"],stars:2},
+{cat:"Defending",name:"Slide Tackle",ps:["🟨"],xbox:["X"],stars:3},
+{cat:"Defending",name:"Jockey",ps:["L2"],xbox:["LT"],stars:3},
+{cat:"Defending",name:"Second Man Press",ps:["R1"],xbox:["RB"],stars:4},
+// ... remaining defending ...
+
+/* ----------------- GOALKEEPING (10) ----------------- */
+{cat:"Goalkeeping",name:"Rush Out",ps:["🔼 hold"],xbox:["Y hold"],stars:4},
+{cat:"Goalkeeping",name:"Manual GK Move",ps:["R3"],xbox:["RS press"],stars:4},
+// ... remaining goalkeeper ...
+
+/* ----------------- ADVANCED (10) ----------------- */
+{cat:"Advanced",name:"Player Lock",ps:["L3 + R3"],xbox:["LS + RS"],stars:4},
+{cat:"Advanced",name:"Skill Cancel",ps:["L2 + R2"],xbox:["LT + RT"],stars:5},
+// ... remaining advanced ...
+];
+
+// ----------------- RENDER FUNCTION -----------------
+function renderSkills(){
+  const search = document.getElementById("searchInput").value.toLowerCase();
+  const container = document.getElementById("content");
+  container.innerHTML = "";
+  const grouped = {};
+  actions.forEach(a=>{if(!grouped[a.cat]) grouped[a.cat]=[];grouped[a.cat].push(a);});
+  for(let cat in grouped){
+    let section=document.createElement("div");
+    section.className="section";
+    section.innerHTML=`<h2>${cat}</h2><div class="skills"></div>`;
+    let box=section.querySelector(".skills");
+    grouped[cat].forEach(a=>{
+      if(a.name.toLowerCase().includes(search)){
+        let div=document.createElement("div");
+        div.className="skill";
+        let controls = consoleType==="ps"?a.ps:a.xbox;
+        let btns="";
+        controls.forEach(c=>btns+=`<span class="btn">${c}</span>`);
+        let stars="";
+        for(let i=0;i<a.stars;i++) stars+=`<span class="star">★</span>`;
+        div.innerHTML=`<h3>${a.name} ${stars}</h3>${btns}`;
+        box.appendChild(div);
+      }
+    });
+    section.innerHTML+=`
+    <div class="video">
+      <iframe src="https://www.youtube.com/embed?listType=search&list=FC26+${cat}+tutorial" allowfullscreen></iframe>
+    </div>`;
+    container.appendChild(section);
+  }
+}
+renderSkills();
+</script>
+
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage:'en'},'google_translate_element');
+}
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
