@@ -1,89 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>FC26 Ultimate Skills Hub</title>
-<style>
-/* RESET */
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  font-family: Arial, sans-serif;
-  background: #121212;
-  color: #f0f0f0;
-  line-height: 1.5;
-}
-
-h1,h2,h3 { color: #ff4500; text-align: center; margin: 15px 0; }
-
-nav {
-  background:#1a1a1a;
-  padding: 10px;
-  text-align: center;
-}
-
-nav a {
-  color:#f0f0f0;
-  margin:0 15px;
-  text-decoration:none;
-  font-weight:bold;
-  transition: color 0.3s;
-}
-
-nav a:hover { color: #ff8c00; }
-
-.section {
-  background:#1e1e1e;
-  margin:20px auto;
-  padding:20px;
-  border-radius:10px;
-  width:90%;
-  max-width:1000px;
-}
-
-.card {
-  background:#2a2a2a;
-  padding:15px;
-  margin:10px 0;
-  border-radius:10px;
-}
-
-.controller-btn {
-  display:inline-block;
-  padding:6px 12px;
-  margin:2px;
-  border-radius:6px;
-  font-weight:bold;
-  text-align:center;
-}
-
-.ps { background:#0f4c81; color:#fff; }
-.xbox { background:#107c10; color:#fff; }
-
-iframe { margin-top:10px; border-radius:10px; width:100%; height:315px; }
-
-img.controller {
-  display:block;
-  margin:10px auto;
-  max-width:500px;
-  border-radius:10px;
-}
-
-a.button {
-  display:inline-block;
-  margin:20px auto;
-  padding:10px 20px;
-  background:#ff8c00;
-  color:#fff;
-  text-decoration:none;
-  border-radius:5px;
-  font-weight:bold;
-  text-align:center;
-}
-
-/* Hover effect for buttons */
-.controller-btn:hover { opacity:0.8; cursor:pointer; }
-</style>
+  <meta charset="UTF-8">
+  <title>FC26 Ultimate Skills</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -93,138 +13,134 @@ a.button {
   <a href="tactics.html">Tactics</a>
 </nav>
 
-<h1>FC26 Ultimate Skills Hub</h1>
-<p style="text-align:center; margin-bottom:20px;">Master all moves: attacking, dribbling, defending, special actions, goalkeeping, hidden/rare moves!</p>
+<h1 style="text-align:center; margin:20px;">FC26 Ultimate Skills Hub</h1>
 
-<!-- Controller Diagram -->
+<!-- SEARCH BAR -->
+<div class="section">
+  <input id="searchBar" type="text" placeholder="Search skills... (attack, dribble, chip shot, etc)">
+</div>
+
+<!-- FILTER BUTTONS -->
+<div class="section filter-buttons">
+  <button onclick="filterCategory('all')">All</button>
+  <button onclick="filterCategory('attacking')">Attacking</button>
+  <button onclick="filterCategory('dribbling')">Dribbling</button>
+  <button onclick="filterCategory('defending')">Defending</button>
+  <button onclick="filterCategory('special')">Special Actions</button>
+  <button onclick="filterCategory('goalkeeping')">Goalkeeping</button>
+</div>
+
+<!-- CONTROLLER DIAGRAM -->
 <div class="section">
   <h2>🎮 Controller Diagram</h2>
-  <p style="text-align:center;">PS & Xbox buttons labeled for all combos</p>
-  <img src="https://example.com/controller-diagram.png" alt="Controller Diagram PS & Xbox" class="controller">
+  <p style="text-align:center;">PS & Xbox controls labeled</p>
+  <img src="https://example.com/controller‑diagram.png" class="controller-img" alt="Controller Diagram">
 </div>
 
 <!-- ATTACKING SKILLS -->
-<div class="section" id="attacking">
-<h2>⚡ Attacking / Skill Moves</h2>
-<iframe src="https://www.youtube.com/embed/80K5xp90t-A" title="Top FC26 Skill Moves" allowfullscreen></iframe>
+<div class="section">
+  <h2>⚡ Attacking / Skill Moves</h2>
+  <iframe src="https://www.youtube.com/embed/80K5xp90t-A" title="Attacking Skills Video" allowfullscreen></iframe>
 
-<div class="card">
-  <strong>Elastico / Reverse Elastico</strong>
-  <p>PS: <span class="controller-btn ps">R Stick →</span> then <span class="controller-btn ps">←</span></p>
-  <p>Xbox: <span class="controller-btn xbox">R Stick →</span> then <span class="controller-btn xbox">←</span></p>
-</div>
+  <div class="card card-skill attacking">
+    <strong>Elastico / Reverse Elastico</strong><br>
+    PS: <span class="controller-btn ps">R Stick →</span> + <span class="controller-btn ps">←</span><br>
+    Xbox: <span class="controller-btn xbox">R Stick →</span> + <span class="controller-btn xbox">←</span>
+  </div>
 
-<div class="card">
-  <strong>Heel Flick / Heel Chop</strong>
-  <p>PS: <span class="controller-btn ps">R Stick ↑</span> then <span class="controller-btn ps">R Stick ↓</span></p>
-  <p>Xbox: <span class="controller-btn xbox">R Stick ↑</span> then <span class="controller-btn xbox">R Stick ↓</span></p>
-</div>
+  <div class="card card-skill attacking">
+    <strong>Heel Flick / Heel Chop</strong><br>
+    PS: <span class="controller-btn ps">R Stick ↑</span> then <span class="controller-btn ps">R Stick ↓</span><br>
+    Xbox: <span class="controller-btn xbox">R Stick ↑</span> then <span class="controller-btn xbox">R Stick ↓</span>
+  </div>
 
-<div class="card">
-  <strong>Roulette / Reverse Roulette / Tornado Spin</strong>
-  <p>PS/Xbox: <span class="controller-btn ps">R Stick Rotate</span></p>
-</div>
+  <div class="card card-skill attacking">
+    <strong>Stepovers (Single/Double/Triple)</strong><br>
+    PS/Xbox: <span class="controller-btn ps">R Stick Circular</span>
+  </div>
 
-<div class="card">
-  <strong>Stepovers (Single/Double/Triple)</strong>
-  <p>PS/Xbox: <span class="controller-btn ps">R Stick Circular Motion</span></p>
-</div>
+  <div class="card card-skill attacking">
+    <strong>Directional Nutmeg</strong><br>
+    PS: <span class="controller-btn ps">L1</span> + <span class="controller-btn ps">R Stick →</span><br>
+    Xbox: <span class="controller-btn xbox">LB</span> + <span class="controller-btn xbox">R Stick →</span>
+  </div>
 
-<div class="card">
-  <strong>Directional Nutmeg</strong>
-  <p>PS: <span class="controller-btn ps">Hold L1 + RS →</span></p>
-  <p>Xbox: <span class="controller-btn xbox">Hold LB + RS →</span></p>
-</div>
-
-<div class="card">
-  <strong>Trickster Rainbow</strong>
-  <p>PS: <span class="controller-btn ps">R Stick ↺ / ↻</span></p>
-  <p>Xbox: <span class="controller-btn xbox">R Stick ↺ / ↻</span></p>
-</div>
-
+  <div class="card card-skill attacking">
+    <strong>Trickster Rainbow</strong><br>
+    PS/Xbox: <span class="controller-btn ps">R Stick ↺ / ↻</span>
+  </div>
 </div>
 
 <!-- DRIBBLING SKILLS -->
-<div class="section" id="dribbling">
-<h2>🎯 Dribbling Skills</h2>
-<iframe src="https://www.youtube.com/embed/8WAlt19IUKM" title="FC26 Dribbling Skills" allowfullscreen></iframe>
+<div class="section">
+  <h2>🎯 Dribbling Skills</h2>
+  <iframe src="https://www.youtube.com/embed/8WAlt19IUKM" title="Dribbling Skills Video" allowfullscreen></iframe>
 
-<div class="card">
-  <strong>Ball Roll</strong>
-  <p>PS/Xbox: <span class="controller-btn ps">R Stick →</span></p>
-</div>
+  <div class="card card-skill dribbling">
+    <strong>Ball Roll</strong><br>
+    PS/Xbox: <span class="controller-btn ps">R Stick →</span>
+  </div>
 
-<div class="card">
-  <strong>Drag Back Flick</strong>
-  <p>PS: <span class="controller-btn ps">L2 + R Stick Down</span></p>
-  <p>Xbox: <span class="controller-btn xbox">LT + R Stick Down</span></p>
-</div>
+  <div class="card card-skill dribbling">
+    <strong>Drag Back Flick</strong><br>
+    PS: <span class="controller-btn ps">L2</span> + <span class="controller-btn ps">R Stick ↓</span><br>
+    Xbox: <span class="controller-btn xbox">LT</span> + <span class="controller-btn xbox">R Stick ↓</span>
+  </div>
 
-<div class="card">
-  <strong>Body Feints (Right / Left / Forward)</strong>
-  <p>PS/Xbox: <span class="controller-btn ps">R Stick → / ← / ↑</span></p>
-</div>
+  <div class="card card-skill dribbling">
+    <strong>Body Feints</strong><br>
+    PS/Xbox: <span class="controller-btn ps">R Stick → / ← / ↑</span>
+  </div>
 </div>
 
 <!-- DEFENDING SKILLS -->
-<div class="section" id="defending">
-<h2>🛡️ Defending Skills</h2>
-<iframe src="https://www.youtube.com/embed/VvCnELF7McI" title="FC26 Defending Tutorial" allowfullscreen></iframe>
+<div class="section">
+  <h2>🛡️ Defending Skills</h2>
+  <iframe src="https://www.youtube.com/embed/VvCnELF7McI" title="Defending Skills Video" allowfullscreen></iframe>
 
-<div class="card">
-  <strong>Standing Tackle</strong>
-  <p>PS/Xbox: <span class="controller-btn ps">O/B + Direction</span></p>
-</div>
+  <div class="card card-skill defending">
+    <strong>Standing Tackle</strong><br>
+    PS/Xbox: <span class="controller-btn ps">O/B + Direction</span>
+  </div>
 
-<div class="card">
-  <strong>Slide Tackle</strong>
-  <p>PS/Xbox: <span class="controller-btn ps">Square/X + Direction</span></p>
-</div>
+  <div class="card card-skill defending">
+    <strong>Slide Tackle</strong><br>
+    PS/Xbox: <span class="controller-btn ps">Square/X + Direction</span>
+  </div>
 
-<div class="card">
-  <strong>Jockey / Shield</strong>
-  <p>PS: <span class="controller-btn ps">L2 + RS Motion</span></p>
-  <p>Xbox: <span class="controller-btn xbox">LT + RS Motion</span></p>
-</div>
+  <div class="card card-skill defending">
+    <strong>Jockey / Shield</strong><br>
+    PS: <span class="controller-btn ps">L2</span> + <span class="controller-btn ps">R Stick Motion</span><br>
+    Xbox: <span class="controller-btn xbox">LT</span> + <span class="controller-btn xbox">R Stick Motion</span>
+  </div>
 </div>
 
 <!-- SPECIAL ACTIONS -->
-<div class="section" id="special-actions">
-<h2>🎯 Special Actions</h2>
-<iframe src="https://www.youtube.com/embed/Qd7xDgpkZb4" title="FC26 Controls Guide" allowfullscreen></iframe>
+<div class="section">
+  <h2>🎯 Special Actions</h2>
+  <iframe src="https://www.youtube.com/embed/Qd7xDgpkZb4" title="Special Actions Video" allowfullscreen></iframe>
 
-<div class="card">
-  <strong>Chip Shot</strong>
-  <p>PS: <span class="controller-btn ps">L1 + 🅾️</span></p>
-  <p>Xbox: <span class="controller-btn xbox">LB + B</span></p>
-</div>
+  <div class="card card-skill special">
+    <strong>Chip Shot</strong><br>
+    PS: <span class="controller-btn ps">L1 + 🅾️</span><br>
+    Xbox: <span class="controller-btn xbox">LB + B</span>
+  </div>
 
-<div class="card">
-  <strong>Finesse Shot</strong>
-  <p>PS: <span class="controller-btn ps">R1 + 🅾️</span></p>
-  <p>Xbox: <span class="controller-btn xbox">RB + B</span></p>
-</div>
+  <div class="card card-skill special">
+    <strong>Finesse Shot</strong><br>
+    PS: <span class="controller-btn ps">R1 + 🅾️</span><br>
+    Xbox: <span class="controller-btn xbox">RB + B</span>
+  </div>
 
-<div class="card">
-  <strong>Fake Shot</strong>
-  <p>PS: <span class="controller-btn ps">🅾️ then ✖️</span></p>
-  <p>Xbox: <span class="controller-btn xbox">B then A</span></p>
-</div>
-
-<div class="card">
-  <strong>Power Shot</strong>
-  <p>PS: <span class="controller-btn ps">L1 + R1 + 🅾️</span></p>
-  <p>Xbox: <span class="controller-btn xbox">LB + RB + B</span></p>
-</div>
-
-<div class="card">
-  <strong>Driven Pass</strong>
-  <p>PS: <span class="controller-btn ps">L1 + R1 + △</span></p>
-  <p>Xbox: <span class="controller-btn xbox">LB + RB + Y</span></p>
-</div>
+  <div class="card card-skill special">
+    <strong>Fake Shot</strong><br>
+    PS: <span class="controller-btn ps">🅾️ then ✖️</span><br>
+    Xbox: <span class="controller-btn xbox">B then A</span>
+  </div>
 </div>
 
 <a href="index.html" class="button">Back to Home</a>
 
+<script src="script.js"></script>
 </body>
 </html>
