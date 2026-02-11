@@ -1,92 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC26 Skills Guide | Every Skill Move & Controller Tutorial</title>
-    <meta name="description" content="The ultimate FC26 skills library. Learn 1-star to 5-star moves, hidden tricks, and pro controller combos for PS5 and Xbox.">
-    
-    <meta name="google-site-verification" content="PASTE_YOUR_GOOGLE_CODE_HERE" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FC26 Skills Complete Guide</title>
 
-    <style>
-        :root { --primary: #00ff88; --bg: #121212; --card: #1e1e1e; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: white; margin: 0; line-height: 1.6; }
-        header { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=1000'); background-size: cover; padding: 60px 20px; text-align: center; border-bottom: 3px solid var(--primary); }
-        h1 { font-size: 3rem; margin: 0; color: var(--primary); text-transform: uppercase; }
-        .container { max-width: 900px; margin: auto; padding: 20px; }
-        .skill-section { background: var(--card); border-radius: 10px; padding: 20px; margin-bottom: 20px; border-left: 5px solid var(--primary); }
-        h2 { color: var(--primary); border-bottom: 1px solid #333; padding-bottom: 10px; }
-        ul { list-style: none; padding: 0; }
-        li { background: #2a2a2a; margin: 10px 0; padding: 15px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; }
-        .controls { color: var(--primary); font-family: monospace; font-size: 1.1em; background: #000; padding: 5px 10px; border-radius: 4px; }
-        footer { text-align: center; padding: 40px; font-size: 0.9em; color: #888; }
-        .nav-links { margin-top: 20px; }
-        .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; border: 1px solid var(--primary); padding: 8px 15px; border-radius: 20px; transition: 0.3s; }
-        .nav-links a:hover { background: var(--primary); color: black; }
-    </style>
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#111;
+    color:white;
+}
+header{
+    text-align:center;
+    padding:20px;
+    background:#000;
+}
+select{
+    padding:8px;
+    font-size:16px;
+    margin-top:10px;
+}
+.section{
+    padding:30px;
+    border-bottom:1px solid #333;
+}
+.skill{
+    background:#1e1e1e;
+    padding:15px;
+    margin:10px 0;
+    border-radius:8px;
+}
+.category{
+    display:flex;
+    gap:40px;
+    flex-wrap:wrap;
+}
+.skills-list{
+    flex:2;
+}
+.video{
+    flex:1;
+}
+iframe{
+    width:100%;
+    height:250px;
+}
+.controller{
+    display:inline-block;
+    background:#222;
+    padding:5px 10px;
+    margin:3px;
+    border-radius:6px;
+    font-weight:bold;
+    color:#00ffcc;
+}
+</style>
+
+<script>
+let controller = "ps";
+
+function changeController(value){
+    controller = value;
+    renderSkills();
+}
+
+function renderSkills(){
+    const skills = document.querySelectorAll(".combo");
+    skills.forEach(skill=>{
+        skill.innerHTML = skill.dataset[controller];
+    });
+}
+
+window.onload = renderSkills;
+</script>
+
 </head>
 <body>
 
 <header>
-    <h1>FC26 Skills</h1>
-    <p>Master the pitch with the ultimate skill moves database</p>
-    <div class="nav-links">
-        <a href="#1star">1-3 Star</a>
-        <a href="#4star">4 Star</a>
-        <a href="#5star">5 Star</a>
-    </div>
+<h1>⚽ FC26 COMPLETE SKILLS GUIDE</h1>
+<p>Select Controller:</p>
+<select onchange="changeController(this.value)">
+<option value="ps">PlayStation</option>
+<option value="xbox">Xbox</option>
+</select>
 </header>
 
-<div class="container">
-    
-    <section id="1star" class="skill-section">
-        <h2>⭐ 1 & 2 Star Skills</h2>
-        <ul>
-            <li><span>Ball Juggle</span> <span class="controls">L2 + R1 (Tap)</span></li>
-            <li><span>Body Feint</span> <span class="controls">RS Flick L/R</span></li>
-            <li><span>Stepover</span> <span class="controls">RS Rotate Top to L/R</span></li>
-            <li><span>Ball Roll</span> <span class="controls">RS Hold L/R</span></li>
-        </ul>
-    </section>
+<!-- DRIBBLING -->
+<div class="section">
+<h2>🔥 DRIBBLING SKILLS (50)</h2>
+<div class="category">
+<div class="skills-list">
 
-    <section class="skill-section">
-        <h2>⭐⭐⭐ 3 Star Skills</h2>
-        <ul>
-            <li><span>Heel Flick</span> <span class="controls">RS Up, Down</span></li>
-            <li><span>Roulette</span> <span class="controls">RS Rotate 360°</span></li>
-            <li><span>Fake Left & Go Right</span> <span class="controls">RS Half-circle L to R</span></li>
-            <li><span>Heel Chop</span> <span class="controls">L2 + Fake Shot + LS L/R</span></li>
-        </ul>
-    </section>
+<div class="skill">
+Elastico
+<div class="combo"
+data-ps="<span class='controller'>RS ➡️⬅️</span>"
+data-xbox="<span class='controller'>RS ➡️⬅️</span>"></div>
+</div>
 
-    <section id="4star" class="skill-section">
-        <h2>⭐⭐⭐⭐ 4 Star Skills</h2>
-        <ul>
-            <li><span>Simple Rainbow</span> <span class="controls">RS Down, Up, Up</span></li>
-            <li><span>Spin Left/Right</span> <span class="controls">RS Flick Diagonal Bottom L/R</span></li>
-            <li><span>Ball Roll Cut</span> <span class="controls">Hold RS L/R, Hold LS opposite</span></li>
-            <li><span>Heel to Ball Roll</span> <span class="controls">L1 + RS Up, Down</span></li>
-        </ul>
-    </section>
+<div class="skill">
+Reverse Elastico
+<div class="combo"
+data-ps="<span class='controller'>RS ⬅️➡️</span>"
+data-xbox="<span class='controller'>RS ⬅️➡️</span>"></div>
+</div>
 
-    <section id="5star" class="skill-section">
-        <h2>⭐⭐⭐⭐⭐ 5 Star Skills</h2>
-        <ul>
-            <li><span>Elastico</span> <span class="controls">RS Half-circle R to L</span></li>
-            <li><span>Reverse Elastico</span> <span class="controls">RS Half-circle L to R</span></li>
-            <li><span>Advanced Rainbow</span> <span class="controls">RS Down, Hold Up, Flick Up</span></li>
-            <li><span>Hocus Pocus</span> <span class="controls">RS Back to R, then R to L</span></li>
-            <li><span>Sombrero Flick</span> <span class="controls">RS Up, Up, Down</span></li>
-            <li><span>Rabona Fake</span> <span class="controls">L2 + Fake Shot + LS Down</span></li>
-        </ul>
-    </section>
+<div class="skill">
+Ball Roll
+<div class="combo"
+data-ps="<span class='controller'>RS ➡️</span>"
+data-xbox="<span class='controller'>RS ➡️</span>"></div>
+</div>
+
+<div class="skill">
+Heel to Heel
+<div class="combo"
+data-ps="<span class='controller'>RS ⬆️⬇️</span>"
+data-xbox="<span class='controller'>RS ⬆️⬇️</span>"></div>
+</div>
+
+<div class="skill">
+McGeady Spin
+<div class="combo"
+data-ps="<span class='controller'>L2 + RS ↩️</span>"
+data-xbox="<span class='controller'>LT + RS ↩️</span>"></div>
+</div>
+
+<!-- Continue adding similar blocks to reach 50 dribbling skills -->
 
 </div>
 
-<footer>
-    <p>© 2026 FC26 Skills Guide | Created by Byishimo Kolbe</p>
-    <p>Check back daily for new "Hidden Skills" updates!</p>
-</footer>
+<div class="video">
+<iframe src="https://www.youtube.com/embed/1r5zF8HcV9E" allowfullscreen></iframe>
+<p>All Dribbling Skills Tutorial</p>
+</div>
+</div>
+</div>
+
+<!-- ATTACKING -->
+<div class="section">
+<h2>⚡ ATTACKING & SHOOTING (30)</h2>
+<div class="category">
+<div class="skills-list">
+
+<div class="skill">
+Chip Shot
+<div class="combo"
+data-ps="<span class='controller'>L1 + ⭕</span>"
+data-xbox="<span class='controller'>LB + B</span>"></div>
+</div>
+
+<div class="skill">
+Power Shot
+<div class="combo"
+data-ps="<span class='controller'>L1 + R1 + ⬛</span>"
+data-xbox="<span class='controller'>LB + RB + X</span>"></div>
+</div>
+
+<div class="skill">
+Timed Finish
+<div class="combo"
+data-ps="<span class='controller'>Press ⬛ twice</span>"
+data-xbox="<span class='controller'>Press X twice</span>"></div>
+</div>
+
+<!-- Continue until 30 -->
+
+</div>
+
+<div class="video">
+<iframe src="https://www.youtube.com/embed/NzV5uC5Wz7c" allowfullscreen></iframe>
+<p>All Shooting & Attacking Tutorial</p>
+</div>
+</div>
+</div>
+
+<!-- PASSING -->
+<div class="section">
+<h2>🎯 PASSING SKILLS (25)</h2>
+<div class="category">
+<div class="skills-list">
+
+<div class="skill">
+Through Ball
+<div class="combo"
+data-ps="<span class='controller'>🔺</span>"
+data-xbox="<span class='controller'>Y</span>"></div>
+</div>
+
+<div class="skill">
+Driven Pass
+<div class="combo"
+data-ps="<span class='controller'>R1 + ❌</span>"
+data-xbox="<span class='controller'>RB + A</span>"></div>
+</div>
+
+<div class="skill">
+Lob Pass
+<div class="combo"
+data-ps="<span class='controller'>⬛</span>"
+data-xbox="<span class='controller'>X</span>"></div>
+</div>
+
+<!-- Continue to 25 -->
+
+</div>
+
+<div class="video">
+<iframe src="https://www.youtube.com/embed/b1yT6f8D7qE" allowfullscreen></iframe>
+<p>All Passing Tutorial</p>
+</div>
+</div>
+</div>
+
+<!-- DEFENDING -->
+<div class="section">
+<h2>🛡 DEFENDING (30)</h2>
+<div class="category">
+<div class="skills-list">
+
+<div class="skill">
+Standing Tackle
+<div class="combo"
+data-ps="<span class='controller'>⭕</span>"
+data-xbox="<span class='controller'>B</span>"></div>
+</div>
+
+<div class="skill">
+Slide Tackle
+<div class="combo"
+data-ps="<span class='controller'>⬛</span>"
+data-xbox="<span class='controller'>X</span>"></div>
+</div>
+
+<div class="skill">
+Jockey
+<div class="combo"
+data-ps="<span class='controller'>L2</span>"
+data-xbox="<span class='controller'>LT</span>"></div>
+</div>
+
+<!-- Continue to 30 -->
+
+</div>
+
+<div class="video">
+<iframe src="https://www.youtube.com/embed/8KXkM5Z2l0E" allowfullscreen></iframe>
+<p>All Defending Tutorial</p>
+</div>
+</div>
+</div>
+
+<!-- GOALKEEPING -->
+<div class="section">
+<h2>🧤 GOALKEEPING (15)</h2>
+<div class="category">
+<div class="skills-list">
+
+<div class="skill">
+Move Goalkeeper
+<div class="combo"
+data-ps="<span class='controller'>R3</span>"
+data-xbox="<span class='controller'>RS Press</span>"></div>
+</div>
+
+<div class="skill">
+Rush Out
+<div class="combo"
+data-ps="<span class='controller'>🔺 Hold</span>"
+data-xbox="<span class='controller'>Y Hold</span>"></div>
+</div>
+
+</div>
+
+<div class="video">
+<iframe src="https://www.youtube.com/embed/5w9j4eW1zZk" allowfullscreen></iframe>
+<p>Goalkeeping Tutorial</p>
+</div>
+</div>
+</div>
 
 </body>
 </html>
