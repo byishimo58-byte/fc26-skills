@@ -1,83 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC26 Skills Guide | Pro Controller Visuals</title>
+    <meta name="description" content="Master every FC26 skill move. Complete tutorials, controller combos for PS5/Xbox, and 5-star skill guides.">
+    
+    <meta name="google-site-verification" content="PASTE_YOUR_CODE_HERE" />
 
-  <!-- Google Search Console Verification -->
-  <meta name="google-site-verification" content="PASTE_YOUR_CODE_HERE" />
+    <style>
+        :root {
+            --ps-blue: #2e6db4; --ps-red: #d32f2f; --ps-pink: #7b1fa2; --ps-green: #388e3c;
+            --xb-green: #2e7d32; --xb-red: #c62828; --xb-blue: #1565c0; --xb-yellow: #f9a825;
+            --bg: #0f0f0f; --card: #1a1a1a; --neon: #00ff88;
+        }
 
-  <!-- Page Title -->
-  <title>FC26 Skills</title>
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: white; margin: 0; padding: 0; }
+        header { text-align: center; padding: 40px 20px; border-bottom: 4px solid var(--neon); background: #111; }
+        h1 { color: var(--neon); text-transform: uppercase; margin: 0; }
+        
+        /* Navigation for your other files */
+        nav { margin-top: 20px; }
+        nav a { color: white; text-decoration: none; margin: 0 10px; padding: 5px 10px; border: 1px solid var(--neon); border-radius: 5px; font-size: 0.9em; }
 
-  <!-- SEO Meta Description -->
-  <meta name="description" content="Learn all FC26 skill moves including dribbling, attacking, defending, goalkeeping, and hidden tricks with PS/Xbox combos.">
+        .container { max-width: 800px; margin: 20px auto; padding: 10px; }
 
-  <!-- SEO Keywords -->
-  <meta name="keywords" content="FC26 skills, FC26 skill moves, FC26 dribbling, FC26 attacking, FC26 defending, FC26 goalkeeping, hidden skills, EA SPORTS FC26, FIFA 26 tricks">
+        /* Button Visuals */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 26px; height: 26px; border-radius: 50%; color: white;
+            font-weight: bold; font-size: 14px; margin: 0 2px;
+            box-shadow: inset 0 -2px 0 rgba(0,0,0,0.4);
+        }
 
-  <!-- Open Graph / Social Media Preview -->
-  <meta property="og:title" content="FC26 Skill Moves Guide & Tutorial">
-  <meta property="og:description" content="Learn all FC26 skill moves, combos, and hidden tricks with videos and tutorials.">
-  <meta property="og:image" content="https://byishimo58-byte.github.io/fc26-skills/social-preview.png">
-  <meta property="og:url" content="https://byishimo58-byte.github.io/fc26-skills/">
-  <meta property="og:type" content="website">
+        .sh { width: 45px; border-radius: 6px; background: #555; } /* Shoulder Buttons */
+        
+        /* PS Colors */
+        .ps-x { background: var(--ps-blue); } .ps-o { background: var(--ps-red); }
+        .ps-s { background: var(--ps-pink); } .ps-t { background: var(--ps-green); }
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="FC26 Skill Moves Guide & Tutorial">
-  <meta name="twitter:description" content="Learn all FC26 skill moves, combos, and hidden tricks with videos and tutorials.">
-  <meta name="twitter:image" content="https://byishimo58-byte.github.io/fc26-skills/social-preview.png">
+        /* Xbox Colors */
+        .xb-a { background: var(--xb-green); } .xb-b { background: var(--xb-red); }
+        .xb-x { background: var(--xb-blue); } .xb-y { background: var(--xb-yellow); }
 
-  <!-- Favicon -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-  <!-- Structured Data for Video -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    "name": "FC26 Dribbling Tutorial",
-    "description": "Learn all FC26 dribbling moves, combos, and tricks in this tutorial.",
-    "thumbnailUrl": "https://byishimo58-byte.github.io/fc26-skills/social-preview.png",
-    "uploadDate": "2026-02-11",
-    "contentUrl": "https://www.youtube.com/embed/8WAlt19IUKM",
-    "embedUrl": "https://www.youtube.com/embed/8WAlt19IUKM"
-  }
-  </script>
-
-  <!-- Optional: Basic Styles -->
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; background: #f5f5f5; color: #222; margin: 0; padding: 0; }
-    header { background: #ff4500; color: white; padding: 20px 0; }
-    h1 { margin: 0; }
-    nav a { margin: 10px; display: inline-block; color: white; text-decoration: none; font-weight: bold; }
-    main { padding: 20px; }
-    footer { background: #222; color: #fff; padding: 10px; font-size: 14px; }
-  </style>
+        .skill-card {
+            background: var(--card); border-radius: 12px; padding: 20px;
+            margin-bottom: 15px; border: 1px solid #333;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .controls { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+        .row { display: flex; align-items: center; font-size: 0.8em; color: #888; }
+    </style>
 </head>
 <body>
 
-  <header>
+<header>
     <h1>FC26 Skills</h1>
     <nav>
-      <a href="skills.html">All Skills</a>
-      <a href="#hidden">Hidden Skills</a>
-      <a href="#videos">Tutorial Videos</a>
+        <a href="skills.html">All Skills</a>
+        <a href="tactics.html">Tactics</a>
+        <a href="weekly.html">Weekly Tips</a>
     </nav>
-  </header>
+</header>
 
-  <main>
-    <p>Welcome to the ultimate FC26 Skills guide! Learn every skill move, controller combo, and hidden trick to dominate the pitch.</p>
+<div class="container">
 
-    <section id="videos">
-      <h2>Featured Tutorial Video</h2>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/8WAlt19IUKM" title="FC26 Dribbling Tutorial" frameborder="0" allowfullscreen></iframe>
-    </section>
-  </main>
+    <div class="skill-card">
+        <div><h3>Elastico</h3><p>5-Star Move</p></div>
+        <div class="controls">
+            <div class="row">PS: <span class="btn sh">R1</span> + <span class="btn ps-t">△</span></div>
+            <div class="row">XB: <span class="btn sh">RB</span> + <span class="btn xb-y">Y</span></div>
+        </div>
+    </div>
 
-  <footer>
-    &copy; 2026 Byishimo Kolbe | FC26 Skills Guide
-  </footer>
+    <div class="skill-card">
+        <div><h3>Fake Shot</h3><p>Basic Move</p></div>
+        <div class="controls">
+            <div class="row">PS: <span class="btn ps-o">○</span> + <span class="btn ps-x">✕</span></div>
+            <div class="row">XB: <span class="btn xb-b">B</span> + <span class="btn xb-a">A</span></div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p style="text-align: center; color: #444;">© 2026 Byishimo Kolbe</p>
+</footer>
 
 </body>
 </html>
