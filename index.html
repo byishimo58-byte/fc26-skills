@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00ffcc">
     <meta name="google-site-verification" content="H_llAXA4HChOTljvScADSOfUpjkJL0WyRIZ_Jl7zt60" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,11 @@
 <meta name="description" content="Complete FC26 Skills Guide. 150+ Skill Moves, Passing, Defending, Goalkeeping and Hidden Mechanics.">
 
 <style>
-body{
+body{<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+</script>
     margin:0;
     font-family:Arial, sans-serif;
     background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
