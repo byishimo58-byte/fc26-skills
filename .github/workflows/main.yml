@@ -1,19 +1,1 @@
-name: Deploy FC26 Skills Site
 
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      # Checkout the repository
-      - uses: actions/checkout@v3
-
-      # Deploy root folder to GitHub Pages
-      - uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./   # deploy everything in the repo root
