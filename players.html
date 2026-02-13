@@ -1,172 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        :root {
-            --gold: #f3df95;
-            --dark-red: #4a0000;
-            --card-width: 260px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FC26 Players – Pro Cards</title>
+<style>
+body {
+  background: #0f182c;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+nav {
+  background: #08121f;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+nav a {
+  color: #00ffcc;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+h1 { margin-top: 20px; }
 
-        body { background: #0b0b0b; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; padding: 50px; font-family: 'Oswald', sans-serif; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+  gap: 15px;
+  padding: 20px;
+}
 
-        /* THE CARD SHELL */
-        .card-wrapper {
-            position: relative;
-            width: var(--card-width);
-            height: 380px;
-            background: linear-gradient(135deg, #7c1a1a 0%, #2b0505 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
-            border: 2px solid var(--gold);
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            transition: transform 0.3s;
-        }
+/* Card Styles */
+.player-card {
+  width: 180px;
+  height: 300px;
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  color: white;
+  box-shadow: 0 5px 15px rgba(0,255,204,0.4);
+  transition: transform 0.2s;
+}
+.player-card:hover { transform: scale(1.05); }
+.player-card.gold { background: linear-gradient(to bottom,#FFD445,#E6A800); }
+.player-card.toty { background: linear-gradient(to bottom,#00FFFF,#00CCCC); }
+.player-card.icon { background: linear-gradient(to bottom,#FF4500,#FF6347); }
 
-        .card-wrapper:hover { transform: translateY(-10px) scale(1.02); }
+.card-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.player-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+  margin-bottom: 5px;
+}
+.name {
+  font-weight: bold;
+  margin: 4px 0;
+  text-align: center;
+}
+.stars { color: #FFD700; margin: 2px 0; }
+.club-country {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: auto;
+}
+.club-country img { width: 20px; height: 20px; }
+.stats {
+  width: 100%;
+  font-size: 13px;
+}
+.stats div { display: flex; justify-content: space-between; }
 
-        /* TEXTURES & OVERLAYS */
-        .glass-texture {
-            position: absolute;
-            inset: 0;
-            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            opacity: 0.1;
-            pointer-events: none;
-        }
-
-        /* TOP INFO: RATING / POS */
-        .top-info {
-            position: absolute;
-            top: 40px;
-            left: 25px;
-            z-index: 10;
-            color: var(--gold);
-            text-align: center;
-        }
-        .rating { font-size: 50px; font-weight: 800; line-height: 0.8; }
-        .pos { font-size: 20px; font-weight: 400; letter-spacing: 1px; }
-
-        /* ICONS: NATION / CLUB */
-        .side-icons {
-            position: absolute;
-            top: 110px;
-            left: 28px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            z-index: 10;
-        }
-        .side-icons img { width: 30px; height: auto; filter: drop-shadow(0 2px 4px black); }
-
-        /* PLAYER IMAGE */
-        .player-render {
-            position: absolute;
-            top: 25px;
-            right: -10px;
-            width: 220px;
-            height: auto;
-            z-index: 5;
-            filter: drop-shadow(-10px 10px 10px rgba(0,0,0,0.5));
-        }
-
-        /* NAME BANNER */
-        .name-area {
-            position: absolute;
-            bottom: 115px;
-            width: 100%;
-            text-align: center;
-            z-index: 10;
-        }
-        .name {
-            font-size: 30px;
-            font-weight: 700;
-            color: var(--gold);
-            text-transform: uppercase;
-            text-shadow: 2px 2px 4px black;
-        }
-
-        /* STATS GRID */
-        .stats-container {
-            position: absolute;
-            bottom: 35px;
-            width: 85%;
-            left: 7.5%;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 5px;
-            z-index: 10;
-            border-top: 1px solid rgba(243, 223, 149, 0.3);
-            padding-top: 10px;
-        }
-        .stat-item { display: flex; flex-direction: column; align-items: center; color: white; }
-        .stat-val { font-weight: 700; font-size: 18px; color: #fff; }
-        .stat-lab { font-size: 12px; color: var(--gold); }
-
-        /* PLAYSTYLE+ DIAMOND */
-        .playstyle-plus {
-            position: absolute;
-            top: 155px;
-            left: 15px;
-            width: 35px;
-            height: 35px;
-            background: #d4af37;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            z-index: 11;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 15px #00ffff;
-            border: 1px solid white;
-        }
-    </style>
+input, select {
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+}
+</style>
 </head>
 <body>
 
-<div id="app"></div>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="players.html">Players</a>
+  <a href="skills.html">Skills</a>
+  <a href="compare.html">Compare</a>
+  <a href="squad.html">Squad</a>
+  <a href="updates.html">Updates</a>
+</nav>
+
+<h1>FC26 Players – Pro Cards</h1>
+<input type="text" id="search" placeholder="Search player...">
+<select id="filterPosition">
+  <option value="">All Positions</option>
+  <option value="ST">ST</option>
+  <option value="CAM">CAM</option>
+  <option value="GK">GK</option>
+  <option value="CM">CM</option>
+  <option value="LW">LW</option>
+  <option value="RW">RW</option>
+</select>
+
+<div class="grid" id="playersGrid"></div>
 
 <script>
-    const players = [
-        { name: "Fermín", rat: 86, pos: "CM", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p492651.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg", clb: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg", s: [83,85,84,88,70,65] },
-        { name: "Mbappé", rat: 91, pos: "ST", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p244731.png", ntn: "https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg", clb: "https://upload.wikimedia.org/wikipedia/en/c/c5/Real_Madrid_CF.svg", s: [97,90,80,92,36,78] },
-        { name: "Haaland", rat: 91, pos: "ST", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p223094.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg", clb: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg", s: [89,93,66,80,45,88] },
-        { name: "Vini Jr", rat: 89, pos: "LW", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p246333.png", ntn: "https://upload.wikimedia.org/wikipedia/en/0/05/Flag_of_Brazil.svg", clb: "https://upload.wikimedia.org/wikipedia/en/c/c5/Real_Madrid_CF.svg", s: [95,82,81,90,29,68] },
-        { name: "Bellingham", rat: 90, pos: "CAM", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p460980.png", ntn: "https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg", clb: "https://upload.wikimedia.org/wikipedia/en/c/c5/Real_Madrid_CF.svg", s: [80,87,83,88,78,82] },
-        { name: "Salah", rat: 89, pos: "RW", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p118748.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Egypt.svg", clb: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg", s: [89,87,82,88,45,75] },
-        { name: "Van Dijk", rat: 89, pos: "CB", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p97032.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_the_Netherlands.svg", clb: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg", s: [78,60,71,72,89,86] },
-        { name: "De Bruyne", rat: 90, pos: "CM", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p61366.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Belgium.svg", clb: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg", s: [72,85,94,87,65,78] },
-        { name: "Rodri", rat: 91, pos: "CDM", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p220566.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg", clb: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg", s: [66,80,86,84,87,85] },
-        { name: "Kane", rat: 90, pos: "ST", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p78830.png", ntn: "https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg", clb: "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_München_logo_%282017%29.svg", s: [69,93,84,83,49,83] }
-    ];
+// --- CREATE 500 PLAYER MOCK DATA ---
+const players = [];
+for(let i=1;i<=500;i++){
+  players.push({
+    name: "Player "+i,
+    rating: Math.floor(Math.random()*11)+75,
+    position: ["ST","CAM","GK","CM","LW","RW"][Math.floor(Math.random()*6)],
+    cardType: ["gold","toty","icon"][Math.floor(Math.random()*3)],
+    stats: {
+      PAC: Math.floor(Math.random()*20)+75,
+      SHO: Math.floor(Math.random()*20)+75,
+      PAS: Math.floor(Math.random()*20)+70,
+      DRI: Math.floor(Math.random()*20)+75,
+      DEF: Math.floor(Math.random()*20)+50,
+      PHY: Math.floor(Math.random()*20)+65
+    },
+    stars: Math.floor(Math.random()*5)+1,
+    club: "images/clubs/club"+((i%20)+1)+".png",
+    nation: "images/nations/nation"+((i%50)+1)+".png",
+    photo: "images/players/player"+i+".png"
+  });
+}
 
-    const labels = ["PAC", "SHO", "PAS", "DRI", "DEF", "PHY"];
-    const container = document.getElementById('app');
+// --- RENDER FUNCTION ---
+const grid = document.getElementById("playersGrid");
+function renderPlayers(list){
+  grid.innerHTML="";
+  list.forEach(p=>{
+    const div = document.createElement("div");
+    div.className = "player-card "+p.cardType;
+    div.innerHTML = `
+      <div class="card-header">
+        <span>${p.rating}</span>
+        <span>${p.position}</span>
+      </div>
+      <img class="player-photo" src="${p.photo}" alt="${p.name}">
+      <div class="name">${p.name}</div>
+      <div class="stats">
+        <div><span>PAC</span><span>${p.stats.PAC}</span></div>
+        <div><span>SHO</span><span>${p.stats.SHO}</span></div>
+        <div><span>PAS</span><span>${p.stats.PAS}</span></div>
+        <div><span>DRI</span><span>${p.stats.DRI}</span></div>
+        <div><span>DEF</span><span>${p.stats.DEF}</span></div>
+        <div><span>PHY</span><span>${p.stats.PHY}</span></div>
+      </div>
+      <div class="stars">${"★".repeat(p.stars)}${"☆".repeat(5-p.stars)}</div>
+      <div class="club-country">
+        <img src="${p.club}" alt="club">
+        <img src="${p.nation}" alt="nation">
+      </div>
+    `;
+    grid.appendChild(div);
+  });
+}
+renderPlayers(players);
 
-    players.forEach(p => {
-        container.innerHTML += `
-            <div class="card-wrapper">
-                <div class="glass-texture"></div>
-                <div class="top-info">
-                    <div class="rating">${p.rat}</div>
-                    <div class="pos">${p.pos}</div>
-                </div>
-                <div class="side-icons">
-                    <img src="${p.ntn}">
-                    <img src="${p.clb}">
-                </div>
-                <div class="playstyle-plus"></div>
-                <img class="player-render" src="${p.img}">
-                <div class="name-area"><div class="name">${p.name}</div></div>
-                <div class="stats-container">
-                    ${p.s.map((val, i) => `
-                        <div class="stat-item">
-                            <span class="stat-val">${val}</span>
-                            <span class="stat-lab">${labels[i]}</span>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    });
+// --- SEARCH & FILTER ---
+document.getElementById("search").addEventListener("input", e=>{
+  const term = e.target.value.toLowerCase();
+  renderPlayers(players.filter(p=>p.name.toLowerCase().includes(term)));
+});
+document.getElementById("filterPosition").addEventListener("change", e=>{
+  const pos = e.target.value;
+  renderPlayers(pos ? players.filter(p=>p.position===pos) : players);
+});
 </script>
+
 </body>
 </html>
