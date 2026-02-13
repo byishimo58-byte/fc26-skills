@@ -7,13 +7,13 @@ body {
 }
 
 .hero {
-    padding: 50px 20px;
+    padding: 60px 20px;
     background: linear-gradient(135deg,#203a43,#0f2027);
 }
 
 .hero h1 {
     font-size: 48px;
-    text-shadow: 0 0 10px #00ffcc;
+    text-shadow: 0 0 12px #00ffcc;
 }
 
 .hero p {
@@ -23,13 +23,13 @@ body {
 
 .hero-buttons .btn-neon {
     display: inline-block;
-    padding: 15px 25px;
+    padding: 15px 30px;
     margin: 10px;
     background: #00ffcc;
     color: black;
-    text-decoration: none;
     font-weight: bold;
     border-radius: 8px;
+    text-decoration: none;
     transition: 0.3s;
 }
 
@@ -46,6 +46,7 @@ body {
     text-align: center;
     color: white;
     box-shadow: 0 0 10px #00ffcc;
+    width: 140px;
 }
 
 .player-card img {
@@ -57,4 +58,24 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+/* Skills page */
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.skills-container .player-card iframe {
+    margin-top: 5px;
+}
+
+/* Search bars */
+input[type="text"], select {
+    padding: 8px;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
 }
