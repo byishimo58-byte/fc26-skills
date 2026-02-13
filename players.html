@@ -2,110 +2,322 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FC 26 - 500 Unique Player Cards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC26 Player Cards</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap');
-        body { background: #050505; color: #f3df95; font-family: 'Oswald', sans-serif; padding: 20px; }
+        @import url('https://fonts.googleapis.com/css2?family=DIN+Condensed:wght@700&display=swap');
         
-        .grid {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DIN Condensed', 'Arial Narrow', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 50px;
+            font-size: 3em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-            gap: 25px; max-width: 1400px; margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            justify-items: center;
         }
 
-        /* AUTHENTIC SHIELD SHAPE */
-        .card {
-            position: relative; width: 210px; height: 300px;
-            background: linear-gradient(145deg, #7c1212 0%, #2b0505 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
-            border: 1.5px solid #f3df95; overflow: hidden;
-            transition: 0.3s transform; cursor: pointer;
-        }
-        .card:hover { transform: scale(1.05); filter: brightness(1.2); z-index: 10; }
-
-        .top-stats { position: absolute; top: 25px; left: 15px; z-index: 5; text-align: center; }
-        .rating { font-size: 40px; font-weight: 700; line-height: 0.8; }
-        .pos { font-size: 16px; color: #fff; text-transform: uppercase; }
-
-        .player-img {
-            position: absolute; top: 15px; right: -10px;
-            width: 180px; z-index: 2;
-            filter: drop-shadow(-5px 5px 5px rgba(0,0,0,0.6));
+        .fut-card {
+            width: 300px;
+            height: 450px;
+            position: relative;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8));
         }
 
-        .name-area {
-            position: absolute; bottom: 0; width: 100%; height: 110px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.95) 55%);
-            display: flex; flex-direction: column; align-items: center; z-index: 5;
+        .fut-card:hover {
+            transform: translateY(-15px) scale(1.02);
         }
-        .name { font-size: 22px; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
 
-        .stats {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            width: 85%; border-top: 1px solid rgba(243, 223, 149, 0.3); padding-top: 8px;
+        /* Card Background Designs */
+        .card-gold {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 450"><defs><linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23c5983d"/><stop offset="50%" style="stop-color:%23e8d592"/><stop offset="100%" style="stop-color:%23c5983d"/></linearGradient></defs><rect width="300" height="450" fill="url(%23gold)"/></svg>');
+            background-size: cover;
         }
-        .s-item { text-align: center; }
-        .s-val { display: block; font-size: 15px; color: #fff; font-weight: 700; }
-        .s-lab { display: block; font-size: 9px; color: #f3df95; }
+
+        .card-totw {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 450"><defs><linearGradient id="totw" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23000000"/><stop offset="50%" style="stop-color:%231a1a1a"/><stop offset="100%" style="stop-color:%23000000"/></linearGradient></defs><rect width="300" height="450" fill="url(%23totw)"/></svg>');
+            background-size: cover;
+        }
+
+        .card-special {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 450"><defs><linearGradient id="special" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%238b0000"/><stop offset="50%" style="stop-color:%23dc143c"/><stop offset="100%" style="stop-color:%238b0000"/></linearGradient></defs><rect width="300" height="450" fill="url(%23special)"/></svg>');
+            background-size: cover;
+        }
+
+        .card-icon {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 450"><defs><linearGradient id="icon" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FFD700"/><stop offset="50%" style="stop-color:%23FFA500"/><stop offset="100%" style="stop-color:%23FFD700"/></linearGradient></defs><rect width="300" height="450" fill="url(%23icon)"/></svg>');
+            background-size: cover;
+        }
+
+        .card-content {
+            position: relative;
+            height: 100%;
+            padding: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        /* Top Section */
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .card-rating-position {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-rating {
+            font-size: 80px;
+            font-weight: 700;
+            line-height: 0.8;
+            color: #2b2b2b;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .card-position {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2b2b2b;
+            margin-top: -8px;
+        }
+
+        .card-nation-club {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .card-flag,
+        .card-club {
+            width: 45px;
+            height: 30px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .card-club {
+            font-size: 12px;
+            font-weight: 700;
+            color: #2b2b2b;
+        }
+
+        /* Player Image */
+        .card-player-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            margin: 10px 0;
+            font-size: 140px;
+        }
+
+        /* Player Name */
+        .card-name {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .card-name h2 {
+            font-size: 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #2b2b2b;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
+        }
+
+        /* Stats */
+        .card-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .card-stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2b2b2b;
+            line-height: 1;
+        }
+
+        .stat-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: rgba(0,0,0,0.65);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Bottom Info */
+        .card-bottom {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 2px solid rgba(0,0,0,0.2);
+        }
+
+        .card-feature {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .feature-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2b2b2b;
+        }
+
+        .feature-stars {
+            display: flex;
+            gap: 2px;
+        }
+
+        .star {
+            font-size: 16px;
+            color: rgba(0,0,0,0.2);
+        }
+
+        .star.filled {
+            color: #FFD700;
+            text-shadow: 0 0 3px rgba(255,215,0,0.8);
+        }
+
+        /* Special Card Styles */
+        .card-totw .card-rating,
+        .card-totw .card-position,
+        .card-totw .card-name h2,
+        .card-totw .stat-value,
+        .card-totw .stat-name,
+        .card-totw .feature-label {
+            color: #ffffff;
+        }
+
+        .card-totw .star {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .card-special .card-rating,
+        .card-special .card-position,
+        .card-special .card-name h2,
+        .card-special .stat-value,
+        .card-special .stat-name,
+        .card-special .feature-label {
+            color: #ffffff;
+        }
+
+        .card-special .star {
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* Version Badge */
+        .card-version {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .fut-card {
+                width: 250px;
+                height: 375px;
+            }
+            
+            .card-rating {
+                font-size: 65px;
+            }
+            
+            .card-player-image {
+                font-size: 110px;
+                height: 160px;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <h1 style="text-align:center; padding: 20px;">FC 26 DATABASE: 500 PLAYERS</h1>
-    <div class="grid" id="cardGrid"></div>
-
-    <script>
-        const grid = document.getElementById('cardGrid');
-
-        // OFFICIAL EA PLAYER IDs (Real Data)
-        const realPlayers = [
-            { id: 231747, name: "Mbappé", rat: 91, pos: "ST" },
-            { id: 239085, name: "Haaland", rat: 91, pos: "ST" },
-            { id: 192985, name: "De Bruyne", rat: 90, pos: "CM" },
-            { id: 158023, name: "Messi", rat: 88, pos: "RW" },
-            { id: 202126, name: "Kane", rat: 90, pos: "ST" },
-            { id: 208722, name: "Salah", rat: 89, pos: "RW" },
-            { id: 209331, name: "Salah", rat: 89, pos: "RW" },
-            { id: 492651, name: "Fermín", rat: 86, pos: "CM" },
-            { id: 231866, name: "Rodri", rat: 91, pos: "CDM" },
-            { id: 238794, name: "Vini Jr", rat: 90, pos: "LW" },
-            { id: 212623, name: "Lewandowski", rat: 88, pos: "ST" },
-            { id: 235243, name: "De Ligt", rat: 86, pos: "CB" }
-            // To get 500, we loop below...
-        ];
-
-        for (let i = 0; i < 500; i++) {
-            // Use real player data if available, otherwise generate a "Sub"
-            const p = realPlayers[i] || {
-                id: 200000 + i, // Fake ID for random photo
-                name: "Player " + (i + 1),
-                rat: Math.floor(Math.random() * 10) + 80,
-                pos: "RES"
-            };
-
-            grid.innerHTML += `
-                <div class="card">
-                    <div class="top-stats">
-                        <div class="rating">${p.rat}</div>
-                        <div class="pos">${p.pos}</div>
-                    </div>
-                    <img class="player-img" 
-                         src="https://digitalhub.fifa.com/transform/player-headshot/${p.id}?io=transform:fill,width:250,height:250" 
-                         onerror="this.src='https://digitalhub.fifa.com/transform/player-headshot/492651?io=transform:fill,width:250,height:250'">
-                    
-                    <div class="name-area">
-                        <div class="name">${p.name}</div>
-                        <div class="stats">
-                            <div class="s-item"><span class="s-val">85</span><span class="s-lab">PAC</span></div>
-                            <div class="s-item"><span class="s-val">85</span><span class="s-lab">SHO</span></div>
-                            <div class="s-item"><span class="s-val">85</span><span class="s-lab">PAS</span></div>
-                            <div class="s-item"><span class="s-val">85</span><span class="s-lab">DRI</span></div>
-                            <div class="s-item"><span class="s-val">85</span><span class="s-lab">DEF</span></div>
-                            <div class="s-item"><span class="s-val">85</span><span class="s-lab">PHY</span></div>
+    <div class="container">
+        <h1>\u26bd FC26 Ultimate Team</h1>
+        <div class="cards-grid">
+            
+            <!-- Mbapp\u00e9 -->
+            <div class="fut-card card-gold">
+                <div class="card-content">
+                    <div class="card-version">GOLD</div>
+                    <div class="card-top">
+                        <div class="card-rating-position">
+                            <div class="card-rating">91</div>
+                            <div class="card-position">ST</div>
+                        </div>
+                        <div class="card-nation-club">
+                            <div class="card-flag">\ud83c\uddeb\ud83c\uddf7</div>
+                            <div class="card-club">RMA</div>
                         </div>
                     </div>
-                </div>`;
-        }
-    </script>
-</body>
-</html>
+                    <div class="card-player-image">\u26bd</div>
+                    <div class="card-name">
+                        <h2>MBAPP\u00c9</h2>
+                    </div>
+                    <div class="card-stats">
+                        <div class="card-stat">
+                            <div class="stat-value">97</div>
+                            <div class="stat-name">PAC</div>
+                        </div>
+                        <div class="card-stat">
+                            <div class="stat-value">89</div>
+                            <div class="stat-name">SHO</div>
+                        </div>
+                        <div class="card-stat">
+                            
