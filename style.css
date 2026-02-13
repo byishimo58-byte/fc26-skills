@@ -1,106 +1,51 @@
-/* RESET + BASE */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 body {
-  font-family: Arial, sans-serif;
-  background: #121212;
-  color: #f0f0f0;
-  padding-top: 60px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f0f0f;
+    color: white;
 }
-a { text-decoration: none; color: inherit; }
 
 nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #1b1b1b;
-  padding: 12px 0;
-  text-align: center;
-  border-bottom: 3px solid #00ff88;
-  z-index: 1000;
+    background: #1a1a1a;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-nav a {
-  margin: 0 18px;
-  font-weight: bold;
-  font-size: 18px;
-  color: #00ff88;
-  transition: color 0.3s;
-}
-nav a:hover { color: #ff8c00; }
 
-.section {
-  margin: 25px auto;
-  padding: 20px;
-  width: 90%;
-  max-width: 1100px;
-  background: #1f1f1f;
-  border-radius: 8px;
-  border-left: 4px solid #00ff88;
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
 }
-h2 { color: #ff8c00; margin-bottom: 12px; text-align: center; }
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #00ff88;
+}
+
+.hero {
+    padding: 80px;
+    text-align: center;
+}
+
+.container {
+    padding: 40px;
+}
 
 .card {
-  background: #2a2a2a;
-  padding: 12px;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  border-left: 4px solid #00ff88;
-}
-.card strong { font-size: 18px; }
-
-.controller-btn {
-  display: inline-block;
-  padding: 6px 12px;
-  margin: 2px;
-  border-radius: 8px;
-  font-weight: bold;
-  text-align: center;
-  font-size: 14px;
-}
-.ps { background: #0f4c81; color: white; }
-.xbox { background: #107c10; color: white; }
-
-iframe {
-  width: 100%;
-  height: 300px;
-  border-radius: 8px;
+    background: #1f1f1f;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px;
 }
 
-#searchBar {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  border: none;
-  font-size: 16px;
-}
-
-.filter-buttons {
-  text-align: center;
-  margin-bottom: 16px;
-}
-.filter-buttons button {
-  margin: 4px;
-  padding: 8px 15px;
-  background: #00ff88;
-  border: none;
-  border-radius: 6px;
-  color: #111;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-.filter-buttons button:hover {
-  background: #ff8c00;
-  color: white;
-}
-
-.controller-img {
-  display:block;
-  margin: 10px auto;
-  max-width: 500px;
-  border-radius: 8px;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
 }
