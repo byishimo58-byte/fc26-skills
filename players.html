@@ -1,25 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Players</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FC26 Players</title>
+<style>
+body { font-family: Arial; background:#0f182c; color:white; text-align:center; margin:0; }
+nav { background:#08121f; padding:10px; display:flex; justify-content:center; }
+nav a { color:#00ffcc; margin:0 15px; text-decoration:none; font-weight:bold; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:20px; padding:20px; }
+.player-card { background:#0f182c; border-radius:12px; padding:12px; text-align:center; box-shadow:0 4px 10px rgba(0,255,204,0.25); border-top:4px solid #00ffcc; }
+.player-card img { width:100%; border-radius:8px; }
+.player-card h3 { margin:8px 0 4px 0; font-size:18px; }
+.player-card p { font-size:14px; color:#e0e0e0; margin:2px 0; }
+input, select { padding:10px; margin:10px; font-size:16px; border-radius:6px; border:none; }
+</style>
 </head>
 <body>
 
-<h1>Players</h1>
-
 <nav>
   <a href="index.html">Home</a>
+  <a href="players.html">Players</a>
+  <a href="skills.html">Skills</a>
   <a href="compare.html">Compare</a>
   <a href="squad.html">Squad</a>
   <a href="updates.html">Updates</a>
 </nav>
 
-<div id="players"></div>
+<h1>FC26 Players</h1>
+<input type="text" id="search" placeholder="Search player...">
+<select id="filterPosition">
+  <option value="">All Positions</option>
+  <option value="ST">ST</option>
+  <option value="CAM">CAM</option>
+  <option value="GK">GK</option>
+</select>
 
-<script src="js/data.js"></script>
-<script src="js/players.js"></script>
+<div class="grid" id="playersGrid"></div>
+
+<script>
+// Players data (standalone, each page has its own)
+const players = [
+  {name:"Kylian Mbappé", rating:91, position:"ST", club:"PSG", nationality:"France", card:"images/cards/mbappe_gold.png"},
+  {name:"Erling Haaland", rating:90, position:"ST", club:"Manchester City", nationality:"Norway", card:"images/cards/haaland_toty.png"},
+  {name:"Lionel Messi", rating:91, position:"RW", club:"Inter Miami", nationality:"Argentina", card:"images/cards/messi_icon.png"},
+  {name:"Kevin De Bruyne", rating:91, position:"CM", club:"Manchester City", nationality:"Belgium", card:"images/cards/debruyne_gold.png"},
+  {name:"Robert Lewandowski", rating:90, position:"ST", club:"Barcelona", nationality:"Poland", card:"images/cards/lewandowski_gold.png"}
+];
+
+// Render players
+const grid = document.getElementById("playersGrid");
+function renderPlayers(list) {
+  grid.innerHTML = "";
+  list.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "player-card";
+    div.innerHTML = `<img src="${p.card}" alt="${p.name}"><h3>${p.name}</h3><p>${p.position} • ${p.rating}</p><p>${p.club}</p>`;
+    grid.appendChild(div);
+  });
+}
+renderPlayers(players);
+
+// Filter/search
+document.getElementById("search").addEventListener("input", e => {
+  const term = e.target.value.toLowerCase();
+  renderPlayers(players.filter(p => p.name.toLowerCase().includes(term)));
+});
+document.getElementById("filterPosition").addEventListener("change", e => {
+  const pos = e.target.value;
+  renderPlayers(pos ? players.filter(p => p.position === pos) : players);
+});
+</script>
 
 </body>
 </html>
