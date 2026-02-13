@@ -3,21 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FC26 Players - 500 Player Database</title>
+<title>FC26 Players – FUT Style</title>
 <style>
-body { font-family: Arial; background:#0f182c; color:white; margin:0; text-align:center;}
-nav { background:#08121f; padding:10px; display:flex; justify-content:center; flex-wrap:wrap;}
-nav a { color:#00ffcc; margin:0 15px; text-decoration:none; font-weight:bold;}
-.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:15px; padding:20px;}
-.player-card { width:150px; height:220px; border-radius:12px; color:white; text-align:center; padding:8px; margin:10px auto; display:inline-block; box-shadow:0 4px 10px rgba(0,255,204,0.3); border-top:4px solid #00ffcc;}
-.player-card.gold { background: linear-gradient(to bottom,#FFD700,#FFC107);}
-.player-card.toty { background: linear-gradient(to bottom,#00FFFF,#00CCCC);}
-.player-card.icon { background: linear-gradient(to bottom,#FF4500,#FF6347);}
-.top-bar { display:flex; justify-content: space-between; font-weight:bold; font-size:14px;}
-.player-photo { width:100px; height:100px; border-radius:50%; margin:5px auto;}
-.name { font-size:16px; font-weight:bold; margin:5px 0;}
-.stars { color:#FFD700; font-size:14px; }
-.club-country img { width:20px; height:20px; margin:0 2px;}
+body {
+  font-family: Arial, sans-serif;
+  background:#0f182c;
+  color:white;
+  margin:0;
+  text-align:center;
+}
+nav {
+  background:#08121f;
+  padding:10px;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+nav a {
+  color:#00ffcc;
+  margin:0 15px;
+  text-decoration:none;
+  font-weight:bold;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:15px;
+  padding:20px;
+}
+.player-card {
+  width:160px;
+  height:240px;
+  border-radius:12px;
+  overflow:hidden;
+  position:relative;
+  background:#1a1a1a;
+  color:white;
+  box-shadow:0 4px 12px rgba(0,255,204,0.4);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  font-size:14px;
+  border-top:4px solid #00ffcc;
+}
+.player-card.gold { border-top:4px solid #FFD700; background: linear-gradient(to bottom,#FFD700,#FFC107);}
+.player-card.toty { border-top:4px solid #00FFFF; background: linear-gradient(to bottom,#00FFFF,#00CCCC);}
+.player-card.icon { border-top:4px solid #FF4500; background: linear-gradient(to bottom,#FF4500,#FF6347);}
+.card-header {
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  padding:4px 8px;
+  font-weight:bold;
+}
+.player-photo {
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  margin:5px 0;
+  border:2px solid white;
+}
+.name {
+  font-weight:bold;
+  margin:4px 0;
+}
+.stars { color:#FFD700; margin:2px 0; }
+.club-country {
+  display:flex;
+  justify-content:center;
+  margin-top:auto;
+  gap:5px;
+}
+.club-country img { width:20px; height:20px; }
 input, select { padding:10px; margin:10px; font-size:16px; border-radius:6px; border:none; }
 </style>
 </head>
@@ -32,7 +90,7 @@ input, select { padding:10px; margin:10px; font-size:16px; border-radius:6px; bo
   <a href="updates.html">Updates</a>
 </nav>
 
-<h1>FC26 Players Database</h1>
+<h1>FC26 Players – FUT Style</h1>
 <input type="text" id="search" placeholder="Search player...">
 <select id="filterPosition">
   <option value="">All Positions</option>
@@ -47,22 +105,22 @@ input, select { padding:10px; margin:10px; font-size:16px; border-radius:6px; bo
 <div class="grid" id="playersGrid"></div>
 
 <script>
-// -------- 500 PLAYER PLACEHOLDERS --------
+// --- PLAYER DATA (sample, replace with real images/names) ---
 const players = [];
 for(let i=1;i<=500;i++){
   players.push({
     name:"Player "+i,
-    rating:Math.floor(Math.random()*11)+80, // random rating 80-90
+    rating:Math.floor(Math.random()*11)+75,
     position:["ST","CAM","GK","CM","LW","RW"][Math.floor(Math.random()*6)],
     type:["gold","toty","icon"][Math.floor(Math.random()*3)],
     stars:Math.floor(Math.random()*5)+1,
-    club:"images/clubs/club"+((i%20)+1)+".png", // placeholder clubs 1-20
-    nation:"images/nations/nation"+((i%50)+1)+".png", // placeholder nations 1-50
-    photo:"images/cards/card"+i+".png" // placeholder card image
+    club:"images/clubs/club"+((i%20)+1)+".png",
+    nation:"images/nations/nation"+((i%50)+1)+".png",
+    photo:"images/cards/card"+i+".png"
   });
 }
 
-// -------- RENDER FUNCTION --------
+// --- RENDER FUNCTION ---
 const grid = document.getElementById("playersGrid");
 function renderPlayers(list){
   grid.innerHTML="";
@@ -70,16 +128,16 @@ function renderPlayers(list){
     const div = document.createElement("div");
     div.className = `player-card ${p.type}`;
     div.innerHTML = `
-      <div class="top-bar">
-        <span class="rating">${p.rating}</span>
-        <span class="position">${p.position}</span>
+      <div class="card-header">
+        <span>${p.rating}</span>
+        <span>${p.position}</span>
       </div>
       <img src="${p.photo}" alt="${p.name}" class="player-photo">
-      <h3 class="name">${p.name}</h3>
+      <div class="name">${p.name}</div>
       <div class="stars">${"★".repeat(p.stars)}${"☆".repeat(5-p.stars)}</div>
       <div class="club-country">
-        <img src="${p.club}" alt="club" class="club-logo">
-        <img src="${p.nation}" alt="nation" class="nation-logo">
+        <img src="${p.club}" alt="club">
+        <img src="${p.nation}" alt="nation">
       </div>
     `;
     grid.appendChild(div);
@@ -87,7 +145,7 @@ function renderPlayers(list){
 }
 renderPlayers(players);
 
-// -------- SEARCH AND FILTER --------
+// --- SEARCH AND FILTER ---
 document.getElementById("search").addEventListener("input", e=>{
   const term = e.target.value.toLowerCase();
   renderPlayers(players.filter(p=>p.name.toLowerCase().includes(term)));
