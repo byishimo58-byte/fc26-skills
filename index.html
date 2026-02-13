@@ -1,22 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>FC26 Skills</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FC26 Hub</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<h1>FC26 Skills</h1>
+<header class="hero">
+    <h1>⚽ FC26 HUB</h1>
+    <p>All Players, Skills, and Weekly Updates</p>
+    <div class="hero-buttons">
+        <a href="players.html" class="btn-neon">Players</a>
+        <a href="skills.html" class="btn-neon">Skills</a>
+        <a href="compare.html" class="btn-neon">Compare</a>
+        <a href="squad.html" class="btn-neon">Squad Builder</a>
+        <a href="updates.html" class="btn-neon">Updates</a>
+    </div>
+</header>
 
-<nav>
-  <a href="players.html">Players</a>
-  <a href="compare.html">Compare</a>
-  <a href="squad.html">Squad</a>
-  <a href="updates.html">Updates</a>
-</nav>
+<section class="featured">
+    <h2>Featured Players</h2>
+    <div class="featured-grid" id="featuredPlayers"></div>
+</section>
 
-<p>Welcome to FC26 Skills Hub.</p>
+<script src="js/data/players1.js"></script>
+<script src="js/players.js"></script>
+<script>
+    // Show first 6 featured players
+    const featured = document.getElementById("featuredPlayers");
+    players1.slice(0,6).forEach(p=>{
+        const div = document.createElement("div");
+        div.classList.add("player-card");
+        div.innerHTML = `<img src="${p.card}" alt="${p.name}" width="100">
+                         <h3>${p.name}</h3>
+                         <p>Rating: ${p.rating}</p>`;
+        featured.appendChild(div);
+    });
+</script>
 
 </body>
 </html>
