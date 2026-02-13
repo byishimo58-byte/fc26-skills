@@ -1,189 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FC26 Players – FUT Style</title>
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background: #0f182c;
-  color: white;
-  margin: 0;
-  text-align: center;
-}
-nav {
-  background: #08121f;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-nav a {
-  color: #00ffcc;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
-  gap: 15px;
-  padding: 20px;
-}
-.player-card {
-  width: 180px;
-  height: 300px;
-  border-radius: 12px;
-  padding: 8px;
-  box-shadow: 0 5px 15px rgba(0,255,204,0.4);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  color: white;
-  background: linear-gradient(to bottom,#FFD445,#E6A800); /* gold card */
-}
-.player-card.toty { background: linear-gradient(to bottom,#00FFFF,#00CCCC); }
-.player-card.icon { background: linear-gradient(to bottom,#FF4500,#FF6347); }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC Player Database</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
 
-.card-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-.player-photo {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 2px solid white;
-  object-fit: cover;
-  margin-bottom: 5px;
-}
-.name {
-  font-weight: bold;
-  margin: 4px 0;
-  text-align: center;
-}
-.stars { color: #FFD700; margin: 2px 0; }
-.club-country {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  margin-top: auto;
-}
-.club-country img { width: 20px; height: 20px; }
-.stats {
-  width: 100%;
-  font-size: 13px;
-}
-.stats div {
-  display: flex;
-  justify-content: space-between;
-}
-input, select {
-  padding: 10px;
-  margin: 10px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-}
-</style>
+        body {
+            background-color: #12141c; /* Dark App Background */
+            font-family: 'Oswald', sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 { margin-bottom: 20px; }
+
+        /* The Grid for 500 Players */
+        #player-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        /* --- THE CARD DESIGN --- */
+        .fut-card {
+            position: relative;
+            width: 200px;
+            height: 300px;
+            margin: 0 auto;
+            /* Approximating the "Centurions" Red/Gold background style */
+            background: radial-gradient(circle at center top, #8a2be2, #4a0000 40%, #1a0b0b 90%);
+            border: 2px solid #f6d889; /* Gold border */
+            border-radius: 15px 15px 25px 25px; /* Shield shape bottom */
+            box-shadow: 0 0 15px rgba(246, 216, 137, 0.3);
+            overflow: hidden;
+            transition: transform 0.2s;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .fut-card:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        /* Top Left Info (Rating/Pos) */
+        .card-rating-pos {
+            position: absolute;
+            top: 35px;
+            left: 25px;
+            text-align: center;
+            line-height: 1;
+            z-index: 2;
+        }
+
+        .card-rating {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fcefa1; /* Gold text */
+            text-shadow: 2px 2px 0 #000;
+            display: block;
+        }
+
+        .card-position {
+            font-size: 16px;
+            font-weight: 400;
+            color: #fcefa1;
+            text-shadow: 1px 1px 0 #000;
+            display: block;
+        }
+
+        /* Player Image */
+        .card-player-img {
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            width: 130px;
+            height: 130px;
+            object-fit: contain;
+            z-index: 1;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+        }
+
+        /* Card Content (Name & Stats) */
+        .card-content {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 10%, transparent);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 15px;
+        }
+
+        .card-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fcefa1;
+            text-shadow: 2px 2px 0 #000;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+            gap: 2px;
+            width: 90%;
+            border-top: 1px solid rgba(252, 239, 161, 0.3);
+            padding-top: 5px;
+        }
+
+        .stat-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 8px;
+            color: #ccc;
+        }
+
+        /* Bottom Row (Nation/Club) */
+        .card-bottom-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .icon-img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        /* Decorations mimicking the card art */
+        .decor-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 11px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+    </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="players.html">Players</a>
-  <a href="skills.html">Skills</a>
-  <a href="compare.html">Compare</a>
-  <a href="squad.html">Squad</a>
-  <a href="updates.html">Updates</a>
-</nav>
+    <h1>Squad Database (500 Players)</h1>
+    
+    <div id="player-grid"></div>
 
-<h1>FC26 Players – FUT Style</h1>
-<input type="text" id="search" placeholder="Search player...">
-<select id="filterPosition">
-  <option value="">All Positions</option>
-  <option value="ST">ST</option>
-  <option value="CAM">CAM</option>
-  <option value="GK">GK</option>
-  <option value="CM">CM</option>
-  <option value="LW">LW</option>
-  <option value="RW">RW</option>
-</select>
+    <script>
+        // 1. THIS IS YOUR DATA
+        // In a real app, you would fetch this from a JSON file or API.
+        // I have added Fermin + a loop to generate 499 dummy players so you can see the layout.
+        
+        const mainPlayer = {
+            id: 1,
+            name: "Fermín",
+            rating: 86,
+            pos: "CM",
+            image: "https://resources.premierleague.com/premierleague/photos/players/250x250/p492651.png", // Placeholder image
+            nation: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png",
+            club: "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/1200px-FC_Barcelona_%28crest%29.svg.png",
+            stats: { pac: 83, sho: 85, pas: 84, dri: 88, def: 70, phy: 65 }
+        };
 
-<div class="grid" id="playersGrid"></div>
+        let allPlayers = [mainPlayer];
 
-<script>
-// --- SAMPLE DATA FOR 500 PLAYERS ---
-const players = [];
-for(let i=1;i<=500;i++){
-  players.push({
-    name: "Player "+i,
-    rating: Math.floor(Math.random()*11)+75,
-    position: ["ST","CAM","GK","CM","LW","RW"][Math.floor(Math.random()*6)],
-    cardType: ["gold","toty","icon"][Math.floor(Math.random()*3)],
-    stats: {
-      PAC: Math.floor(Math.random()*20)+75,
-      SHO: Math.floor(Math.random()*20)+75,
-      PAS: Math.floor(Math.random()*20)+70,
-      DRI: Math.floor(Math.random()*20)+75,
-      DEF: Math.floor(Math.random()*20)+50,
-      PHY: Math.floor(Math.random()*20)+65
-    },
-    stars: Math.floor(Math.random()*5)+1,
-    club: "images/clubs/club"+((i%20)+1)+".png",
-    nation: "images/nations/nation"+((i%50)+1)+".png",
-    photo: "images/players/player"+i+".png"
-  });
-}
+        // Generating 499 Dummy Players to simulate your "500 players" request
+        for(let i = 0; i < 499; i++) {
+            allPlayers.push({
+                id: i+2,
+                name: `Player ${i+1}`,
+                rating: Math.floor(Math.random() * (99 - 75) + 75), // Random rating 75-99
+                pos: ["ST", "CM", "CB", "GK"][Math.floor(Math.random()*4)],
+                image: "https://via.placeholder.com/150/000000/FFFFFF/?text=Face", // Dummy face
+                nation: "https://via.placeholder.com/20?text=Flag",
+                club: "https://via.placeholder.com/20?text=Club",
+                stats: { 
+                    pac: Math.floor(Math.random() * 99), 
+                    sho: Math.floor(Math.random() * 99), 
+                    pas: Math.floor(Math.random() * 99), 
+                    dri: Math.floor(Math.random() * 99), 
+                    def: Math.floor(Math.random() * 99), 
+                    phy: Math.floor(Math.random() * 99) 
+                }
+            });
+        }
 
-// --- RENDER FUNCTION ---
-const grid = document.getElementById("playersGrid");
-function renderPlayers(list){
-  grid.innerHTML="";
-  list.forEach(p=>{
-    const div = document.createElement("div");
-    div.className = "player-card "+p.cardType;
-    div.innerHTML = `
-      <div class="card-header">
-        <span>${p.rating}</span>
-        <span>${p.position}</span>
-      </div>
-      <img class="player-photo" src="${p.photo}" alt="${p.name}">
-      <div class="name">${p.name}</div>
-      <div class="stats">
-        <div><span>PAC</span><span>${p.stats.PAC}</span></div>
-        <div><span>SHO</span><span>${p.stats.SHO}</span></div>
-        <div><span>PAS</span><span>${p.stats.PAS}</span></div>
-        <div><span>DRI</span><span>${p.stats.DRI}</span></div>
-        <div><span>DEF</span><span>${p.stats.DEF}</span></div>
-        <div><span>PHY</span><span>${p.stats.PHY}</span></div>
-      </div>
-      <div class="stars">${"★".repeat(p.stars)}${"☆".repeat(5-p.stars)}</div>
-      <div class="club-country">
-        <img src="${p.club}" alt="club">
-        <img src="${p.nation}" alt="nation">
-      </div>
-    `;
-    grid.appendChild(div);
-  });
-}
-renderPlayers(players);
+        // 2. THE GENERATOR FUNCTION
+        const grid = document.getElementById('player-grid');
 
-// --- SEARCH AND FILTER ---
-document.getElementById("search").addEventListener("input", e=>{
-  const term = e.target.value.toLowerCase();
-  renderPlayers(players.filter(p=>p.name.toLowerCase().includes(term)));
-});
-document.getElementById("filterPosition").addEventListener("change", e=>{
-  const pos = e.target.value;
-  renderPlayers(pos ? players.filter(p=>p.position===pos) : players);
-});
-</script>
+        allPlayers.forEach(player => {
+            // Create the card container
+            const card = document.createElement('div');
+            card.classList.add('fut-card');
 
+            // Inject the HTML inside the card
+            card.innerHTML = `
+                <div class="decor-lines"></div>
+                
+                <div class="card-rating-pos">
+                    <span class="card-rating">${player.rating}</span>
+                    <span class="card-position">${player.pos}</span>
+                </div>
+
+                <img src="${player.image}" alt="${player.name}" class="card-player-img" onerror="this.style.display='none'">
+
+                <div class="card-content">
+                    <div class="card-name">${player.name}</div>
+                    
+                    <div class="card-stats">
+                        <div class="stat-box"><span class="stat-value">${player.stats.pac}</span><span class="stat-label">PAC</span></div>
+                        <div class="stat-box"><span class="stat-value">${player.stats.sho}</span><span class="stat-label">SHO</span></div>
+                        <div class="stat-box"><span class="stat-value">${player.stats.pas}</span><span class="stat-label">PAS</span></div>
+                        <div class="stat-box"><span class="stat-value">${player.stats.dri}</span><span class="stat-label">DRI</span></div>
+                        <div class="stat-box"><span class="stat-value">${player.stats.def}</span><span class="stat-label">DEF</span></div>
+                        <div class="stat-box"><span class="stat-value">${player.stats.phy}</span><span class="stat-label">PHY</span></div>
+                    </div>
+
+                    <div class="card-bottom-icons">
+                        <img src="${player.nation}" class="icon-img" title="Nation">
+                        <img src="${player.club}" class="icon-img" title="Club">
+                    </div>
+                </div>
+            `;
+
+            grid.appendChild(card);
+        });
+
+    </script>
 </body>
 </html>
