@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>FC26 Player Reviews</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; background: #fff8dc; color: #222; }
-    h1 { color: #ff8c00; }
-    ul { text-align: left; display: inline-block; margin-top: 20px; }
-    a { display: block; margin: 20px; color: #0066cc; text-decoration: none; font-weight: bold; }
-  </style>
+<meta charset="UTF-8">
+<title>Players - FC26</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>FC26 Player Reviews</h1>
-  <p>Top meta & budget-friendly players for your squads!</p>
 
-  <ul>
-    <li><strong>Budget Beast:</strong> Player X – Fast, strong, cheap.</li>
-    <li><strong>Mid-tier Star:</strong> Player Y – Great passing + shooting.</li>
-    <li><strong>Top Meta:</strong> Player Z – Excellent dribbling + skills.</li>
-    <li><strong>Goalkeeper Tips:</strong> Choose reaction + diving high stats.</li>
-  </ul>
+<nav>
+<h1>FC26 Hub</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="players.html">Players</a></li>
+<li><a href="compare.html">Compare</a></li>
+<li><a href="squad.html">Squad Builder</a></li>
+<li><a href="updates.html">Updates</a></li>
+</ul>
+</nav>
 
-  <a href="index.html">Back to Home</a>
+<div class="container">
+<h2>Players Database</h2>
+
+<input type="text" id="search" placeholder="Search player...">
+<select id="filterPosition">
+<option value="">All Positions</option>
+<option value="ST">ST</option>
+<option value="CAM">CAM</option>
+</select>
+
+<div id="playersGrid" class="grid"></div>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/players.js"></script>
 </body>
 </html>
-
