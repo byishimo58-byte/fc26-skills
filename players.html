@@ -7,76 +7,89 @@
 <style>
 body {
   font-family: Arial, sans-serif;
-  background:#0f182c;
-  color:white;
-  margin:0;
-  text-align:center;
+  background: #0f182c;
+  color: white;
+  margin: 0;
+  text-align: center;
 }
 nav {
-  background:#08121f;
-  padding:10px;
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
+  background: #08121f;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 nav a {
-  color:#00ffcc;
-  margin:0 15px;
-  text-decoration:none;
-  font-weight:bold;
+  color: #00ffcc;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
 }
 .grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-  gap:15px;
-  padding:20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+  gap: 15px;
+  padding: 20px;
 }
 .player-card {
-  width:160px;
-  height:240px;
-  border-radius:12px;
-  overflow:hidden;
-  position:relative;
-  background:#1a1a1a;
-  color:white;
-  box-shadow:0 4px 12px rgba(0,255,204,0.4);
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  align-items:center;
-  font-size:14px;
-  border-top:4px solid #00ffcc;
+  width: 180px;
+  height: 300px;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 5px 15px rgba(0,255,204,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  color: white;
+  background: linear-gradient(to bottom,#FFD445,#E6A800); /* gold card */
 }
-.player-card.gold { border-top:4px solid #FFD700; background: linear-gradient(to bottom,#FFD700,#FFC107);}
-.player-card.toty { border-top:4px solid #00FFFF; background: linear-gradient(to bottom,#00FFFF,#00CCCC);}
-.player-card.icon { border-top:4px solid #FF4500; background: linear-gradient(to bottom,#FF4500,#FF6347);}
+.player-card.toty { background: linear-gradient(to bottom,#00FFFF,#00CCCC); }
+.player-card.icon { background: linear-gradient(to bottom,#FF4500,#FF6347); }
+
 .card-header {
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  padding:4px 8px;
-  font-weight:bold;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 .player-photo {
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  margin:5px 0;
-  border:2px solid white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+  margin-bottom: 5px;
 }
 .name {
-  font-weight:bold;
-  margin:4px 0;
+  font-weight: bold;
+  margin: 4px 0;
+  text-align: center;
 }
-.stars { color:#FFD700; margin:2px 0; }
+.stars { color: #FFD700; margin: 2px 0; }
 .club-country {
-  display:flex;
-  justify-content:center;
-  margin-top:auto;
-  gap:5px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: auto;
 }
-.club-country img { width:20px; height:20px; }
-input, select { padding:10px; margin:10px; font-size:16px; border-radius:6px; border:none; }
+.club-country img { width: 20px; height: 20px; }
+.stats {
+  width: 100%;
+  font-size: 13px;
+}
+.stats div {
+  display: flex;
+  justify-content: space-between;
+}
+input, select {
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+}
 </style>
 </head>
 <body>
@@ -105,18 +118,26 @@ input, select { padding:10px; margin:10px; font-size:16px; border-radius:6px; bo
 <div class="grid" id="playersGrid"></div>
 
 <script>
-// --- PLAYER DATA (sample, replace with real images/names) ---
+// --- SAMPLE DATA FOR 500 PLAYERS ---
 const players = [];
 for(let i=1;i<=500;i++){
   players.push({
-    name:"Player "+i,
-    rating:Math.floor(Math.random()*11)+75,
-    position:["ST","CAM","GK","CM","LW","RW"][Math.floor(Math.random()*6)],
-    type:["gold","toty","icon"][Math.floor(Math.random()*3)],
-    stars:Math.floor(Math.random()*5)+1,
-    club:"images/clubs/club"+((i%20)+1)+".png",
-    nation:"images/nations/nation"+((i%50)+1)+".png",
-    photo:"images/cards/card"+i+".png"
+    name: "Player "+i,
+    rating: Math.floor(Math.random()*11)+75,
+    position: ["ST","CAM","GK","CM","LW","RW"][Math.floor(Math.random()*6)],
+    cardType: ["gold","toty","icon"][Math.floor(Math.random()*3)],
+    stats: {
+      PAC: Math.floor(Math.random()*20)+75,
+      SHO: Math.floor(Math.random()*20)+75,
+      PAS: Math.floor(Math.random()*20)+70,
+      DRI: Math.floor(Math.random()*20)+75,
+      DEF: Math.floor(Math.random()*20)+50,
+      PHY: Math.floor(Math.random()*20)+65
+    },
+    stars: Math.floor(Math.random()*5)+1,
+    club: "images/clubs/club"+((i%20)+1)+".png",
+    nation: "images/nations/nation"+((i%50)+1)+".png",
+    photo: "images/players/player"+i+".png"
   });
 }
 
@@ -126,14 +147,22 @@ function renderPlayers(list){
   grid.innerHTML="";
   list.forEach(p=>{
     const div = document.createElement("div");
-    div.className = `player-card ${p.type}`;
+    div.className = "player-card "+p.cardType;
     div.innerHTML = `
       <div class="card-header">
         <span>${p.rating}</span>
         <span>${p.position}</span>
       </div>
-      <img src="${p.photo}" alt="${p.name}" class="player-photo">
+      <img class="player-photo" src="${p.photo}" alt="${p.name}">
       <div class="name">${p.name}</div>
+      <div class="stats">
+        <div><span>PAC</span><span>${p.stats.PAC}</span></div>
+        <div><span>SHO</span><span>${p.stats.SHO}</span></div>
+        <div><span>PAS</span><span>${p.stats.PAS}</span></div>
+        <div><span>DRI</span><span>${p.stats.DRI}</span></div>
+        <div><span>DEF</span><span>${p.stats.DEF}</span></div>
+        <div><span>PHY</span><span>${p.stats.PHY}</span></div>
+      </div>
       <div class="stars">${"★".repeat(p.stars)}${"☆".repeat(5-p.stars)}</div>
       <div class="club-country">
         <img src="${p.club}" alt="club">
@@ -152,7 +181,7 @@ document.getElementById("search").addEventListener("input", e=>{
 });
 document.getElementById("filterPosition").addEventListener("change", e=>{
   const pos = e.target.value;
-  renderPlayers(pos ? players.filter(p=>p.position===pos):players);
+  renderPlayers(pos ? players.filter(p=>p.position===pos) : players);
 });
 </script>
 
