@@ -1,51 +1,60 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #0f0f0f;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
     color: white;
-}
-
-nav {
-    background: #1a1a1a;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-}
-
-nav a:hover {
-    color: #00ff88;
-}
-
-.hero {
-    padding: 80px;
     text-align: center;
 }
 
-.container {
-    padding: 40px;
+.hero {
+    padding: 50px 20px;
+    background: linear-gradient(135deg,#203a43,#0f2027);
 }
 
-.card {
-    background: #1f1f1f;
-    padding: 15px;
-    border-radius: 8px;
+.hero h1 {
+    font-size: 48px;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.hero-buttons .btn-neon {
+    display: inline-block;
+    padding: 15px 25px;
     margin: 10px;
+    background: #00ffcc;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+.hero-buttons .btn-neon:hover {
+    background: #00ccaa;
+}
+
+.player-card {
+    display: inline-block;
+    margin: 10px;
+    background: #111;
+    padding: 10px;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 10px #00ffcc;
+}
+
+.player-card img {
+    border-radius: 12px;
+    border: 2px solid gold;
+}
+
+.featured-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
