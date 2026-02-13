@@ -1,26 +1,75 @@
-// SAVE THIS AS players.js
-const realStars = [
-    { name: "Mbappé", rat: 91, pos: "ST", pac: 97, sho: 90, pas: 80, dri: 92, def: 36, phy: 78, img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p244731.png" },
-    { name: "Haaland", rat: 91, pos: "ST", pac: 88, sho: 94, pas: 66, dri: 80, def: 45, phy: 88, img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p223094.png" },
-    { name: "Rodri", rat: 91, pos: "CDM", pac: 66, sho: 80, pas: 86, dri: 84, def: 87, phy: 85, img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p220566.png" },
-    { name: "Bellingham", rat: 90, pos: "CAM", pac: 80, sho: 87, pas: 83, dri: 88, def: 78, phy: 82, img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p460980.png" },
-    { name: "Vini Jr", rat: 90, pos: "LW", pac: 95, sho: 82, pas: 81, dri: 90, def: 29, phy: 68, img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p246333.png" },
-    { name: "De Bruyne", rat: 90, pos: "CM", pac: 67, sho: 87, pas: 94, dri: 87, def: 65, phy: 78, img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p61366.png" },
-    { name: "Kane", rat: 90, pos: "ST", pac: 65, sho: 93, pas: 84, dri: 83, def: 49, phy: 82, img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p78830.png" },
-    { name: "Messi", rat: 88, pos: "RW", pac: 80, sho: 87, pas: 90, dri: 92, def: 33, phy: 64, img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p129341.png" },
-    { name: "Salah", rat: 89, pos: "RW", pac: 89, sho: 87, pas: 82, dri: 88, def: 45, phy: 75, img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p118748.png" },
-    { name: "Van Dijk", rat: 89, pos: "CB", pac: 78, sho: 60, pas: 71, dri: 72, def: 89, phy: 86, img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p97032.png" },
-    { name: "Fermín", rat: 86, pos: "CM", pac: 83, sho: 85, pas: 84, dri: 88, def: 70, phy: 65, img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p492651.png" }
-];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FC 26 Pro Database</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+        body { background: #0a0a0a; color: #f3df95; font-family: 'Oswald', sans-serif; padding: 20px; }
+        
+        .container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+            gap: 25px; max-width: 1400px; margin: 0 auto; 
+        }
 
-// This loop creates the remaining 489 players to reach 500
-const fullDatabase = [...realStars];
-for (let i = fullDatabase.length + 1; i <= 500; i++) {
-    fullDatabase.push({
-        name: "Pro Player " + i,
-        rat: Math.floor(Math.random() * 10) + 80,
-        pos: "SUB",
-        pac: 75, sho: 75, pas: 75, dri: 75, def: 75, phy: 75,
-        img: "https://via.placeholder.com/200x200?text=Photo+" + i
-    });
-}
+        /* CARD STYLE - EXACT MATCH */
+        .card {
+            position: relative; width: 220px; height: 320px;
+            background: linear-gradient(145deg, #700a0a, #1a0505);
+            clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
+            border: 2px solid #f3df95; overflow: hidden;
+            transition: 0.3s; cursor: pointer;
+        }
+        .card:hover { transform: scale(1.05); filter: brightness(1.2); }
+
+        .rat-pos { position: absolute; top: 25px; left: 15px; z-index: 5; text-align: center; }
+        .rat { font-size: 40px; font-weight: 700; line-height: 1; color: #f3df95; }
+        .pos { font-size: 16px; color: #fff; }
+
+        .p-img { position: absolute; top: 15px; right: -5px; width: 180px; z-index: 2; }
+
+        .overlay {
+            position: absolute; bottom: 0; width: 100%; height: 110px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            display: flex; flex-direction: column; align-items: center; z-index: 5;
+        }
+        .name { font-size: 22px; text-transform: uppercase; margin-bottom: 5px; }
+
+        .stats-grid { 
+            display: grid; grid-template-columns: repeat(3, 1fr); 
+            width: 85%; border-top: 1px solid rgba(243, 223, 149, 0.3); padding-top: 5px;
+        }
+        .s-box { text-align: center; }
+        .v { display: block; font-size: 14px; color: #fff; }
+        .l { display: block; font-size: 9px; color: #f3df95; }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center">FC 26 - TOP 500 PLAYERS</h1>
+    <div class="container" id="grid"></div>
+
+    <script src="players.js"></script>
+    <script>
+        const grid = document.getElementById('grid');
+        fullDatabase.forEach(p => {
+            grid.innerHTML += `
+                <div class="card">
+                    <div class="rat-pos"><div class="rat">${p.rat}</div><div class="pos">${p.pos}</div></div>
+                    <img src="${p.img}" class="p-img">
+                    <div class="overlay">
+                        <div class="name">${p.name}</div>
+                        <div class="stats-grid">
+                            <div class="s-box"><span class="v">${p.pac}</span><span class="l">PAC</span></div>
+                            <div class="s-box"><span class="v">${p.sho}</span><span class="l">SHO</span></div>
+                            <div class="s-box"><span class="v">${p.pas}</span><span class="l">PAS</span></div>
+                            <div class="s-box"><span class="v">${p.dri}</span><span class="l">DRI</span></div>
+                            <div class="s-box"><span class="v">${p.def}</span><span class="l">DEF</span></div>
+                            <div class="s-box"><span class="v">${p.phy}</span><span class="l">PHY</span></div>
+                        </div>
+                    </div>
+                </div>`;
+        });
+    </script>
+</body>
+</html>
