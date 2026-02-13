@@ -1,255 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC Player Database</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
-
-        body {
-            background-color: #12141c; /* Dark App Background */
-            font-family: 'Oswald', sans-serif;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+        :root {
+            --gold: #f3df95;
+            --dark-red: #4a0000;
+            --card-width: 260px;
         }
 
-        h1 { margin-bottom: 20px; }
+        body { background: #0b0b0b; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; padding: 50px; font-family: 'Oswald', sans-serif; }
 
-        /* The Grid for 500 Players */
-        #player-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1400px;
-        }
-
-        /* --- THE CARD DESIGN --- */
-        .fut-card {
+        /* THE CARD SHELL */
+        .card-wrapper {
             position: relative;
-            width: 200px;
-            height: 300px;
-            margin: 0 auto;
-            /* Approximating the "Centurions" Red/Gold background style */
-            background: radial-gradient(circle at center top, #8a2be2, #4a0000 40%, #1a0b0b 90%);
-            border: 2px solid #f6d889; /* Gold border */
-            border-radius: 15px 15px 25px 25px; /* Shield shape bottom */
-            box-shadow: 0 0 15px rgba(246, 216, 137, 0.3);
+            width: var(--card-width);
+            height: 380px;
+            background: linear-gradient(135deg, #7c1a1a 0%, #2b0505 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
+            border: 2px solid var(--gold);
             overflow: hidden;
-            transition: transform 0.2s;
-            cursor: pointer;
-            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            transition: transform 0.3s;
         }
 
-        .fut-card:hover {
-            transform: scale(1.05);
-            z-index: 10;
-        }
+        .card-wrapper:hover { transform: translateY(-10px) scale(1.02); }
 
-        /* Top Left Info (Rating/Pos) */
-        .card-rating-pos {
+        /* TEXTURES & OVERLAYS */
+        .glass-texture {
             position: absolute;
-            top: 35px;
-            left: 25px;
-            text-align: center;
-            line-height: 1;
-            z-index: 2;
-        }
-
-        .card-rating {
-            font-size: 32px;
-            font-weight: 700;
-            color: #fcefa1; /* Gold text */
-            text-shadow: 2px 2px 0 #000;
-            display: block;
-        }
-
-        .card-position {
-            font-size: 16px;
-            font-weight: 400;
-            color: #fcefa1;
-            text-shadow: 1px 1px 0 #000;
-            display: block;
-        }
-
-        /* Player Image */
-        .card-player-img {
-            position: absolute;
-            top: 40px;
-            right: 10px;
-            width: 130px;
-            height: 130px;
-            object-fit: contain;
-            z-index: 1;
-            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
-        }
-
-        /* Card Content (Name & Stats) */
-        .card-content {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 120px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 10%, transparent);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-            padding-bottom: 15px;
-        }
-
-        .card-name {
-            font-size: 22px;
-            font-weight: 700;
-            color: #fcefa1;
-            text-shadow: 2px 2px 0 #000;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-        }
-
-        .card-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-            gap: 2px;
-            width: 90%;
-            border-top: 1px solid rgba(252, 239, 161, 0.3);
-            padding-top: 5px;
-        }
-
-        .stat-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .stat-value {
-            font-size: 14px;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .stat-label {
-            font-size: 8px;
-            color: #ccc;
-        }
-
-        /* Bottom Row (Nation/Club) */
-        .card-bottom-icons {
-            display: flex;
-            gap: 10px;
-            margin-top: 8px;
-        }
-
-        .icon-img {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-        }
-
-        /* Decorations mimicking the card art */
-        .decor-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 11px);
-            z-index: 0;
+            inset: 0;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            opacity: 0.1;
             pointer-events: none;
         }
 
+        /* TOP INFO: RATING / POS */
+        .top-info {
+            position: absolute;
+            top: 40px;
+            left: 25px;
+            z-index: 10;
+            color: var(--gold);
+            text-align: center;
+        }
+        .rating { font-size: 50px; font-weight: 800; line-height: 0.8; }
+        .pos { font-size: 20px; font-weight: 400; letter-spacing: 1px; }
+
+        /* ICONS: NATION / CLUB */
+        .side-icons {
+            position: absolute;
+            top: 110px;
+            left: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 10;
+        }
+        .side-icons img { width: 30px; height: auto; filter: drop-shadow(0 2px 4px black); }
+
+        /* PLAYER IMAGE */
+        .player-render {
+            position: absolute;
+            top: 25px;
+            right: -10px;
+            width: 220px;
+            height: auto;
+            z-index: 5;
+            filter: drop-shadow(-10px 10px 10px rgba(0,0,0,0.5));
+        }
+
+        /* NAME BANNER */
+        .name-area {
+            position: absolute;
+            bottom: 115px;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
+        .name {
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        /* STATS GRID */
+        .stats-container {
+            position: absolute;
+            bottom: 35px;
+            width: 85%;
+            left: 7.5%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            z-index: 10;
+            border-top: 1px solid rgba(243, 223, 149, 0.3);
+            padding-top: 10px;
+        }
+        .stat-item { display: flex; flex-direction: column; align-items: center; color: white; }
+        .stat-val { font-weight: 700; font-size: 18px; color: #fff; }
+        .stat-lab { font-size: 12px; color: var(--gold); }
+
+        /* PLAYSTYLE+ DIAMOND */
+        .playstyle-plus {
+            position: absolute;
+            top: 155px;
+            left: 15px;
+            width: 35px;
+            height: 35px;
+            background: #d4af37;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            z-index: 11;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px #00ffff;
+            border: 1px solid white;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Squad Database (500 Players)</h1>
-    
-    <div id="player-grid"></div>
+<div id="app"></div>
 
-    <script>
-        // 1. THIS IS YOUR DATA
-        // In a real app, you would fetch this from a JSON file or API.
-        // I have added Fermin + a loop to generate 499 dummy players so you can see the layout.
-        
-        const mainPlayer = {
-            id: 1,
-            name: "Fermín",
-            rating: 86,
-            pos: "CM",
-            image: "https://resources.premierleague.com/premierleague/photos/players/250x250/p492651.png", // Placeholder image
-            nation: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png",
-            club: "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/1200px-FC_Barcelona_%28crest%29.svg.png",
-            stats: { pac: 83, sho: 85, pas: 84, dri: 88, def: 70, phy: 65 }
-        };
+<script>
+    const players = [
+        { name: "Fermín", rat: 86, pos: "CM", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p492651.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg", clb: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg", s: [83,85,84,88,70,65] },
+        { name: "Mbappé", rat: 91, pos: "ST", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p244731.png", ntn: "https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg", clb: "https://upload.wikimedia.org/wikipedia/en/c/c5/Real_Madrid_CF.svg", s: [97,90,80,92,36,78] },
+        { name: "Haaland", rat: 91, pos: "ST", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p223094.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg", clb: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg", s: [89,93,66,80,45,88] },
+        { name: "Vini Jr", rat: 89, pos: "LW", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p246333.png", ntn: "https://upload.wikimedia.org/wikipedia/en/0/05/Flag_of_Brazil.svg", clb: "https://upload.wikimedia.org/wikipedia/en/c/c5/Real_Madrid_CF.svg", s: [95,82,81,90,29,68] },
+        { name: "Bellingham", rat: 90, pos: "CAM", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p460980.png", ntn: "https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg", clb: "https://upload.wikimedia.org/wikipedia/en/c/c5/Real_Madrid_CF.svg", s: [80,87,83,88,78,82] },
+        { name: "Salah", rat: 89, pos: "RW", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p118748.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Egypt.svg", clb: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg", s: [89,87,82,88,45,75] },
+        { name: "Van Dijk", rat: 89, pos: "CB", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p97032.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_the_Netherlands.svg", clb: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg", s: [78,60,71,72,89,86] },
+        { name: "De Bruyne", rat: 90, pos: "CM", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p61366.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Belgium.svg", clb: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg", s: [72,85,94,87,65,78] },
+        { name: "Rodri", rat: 91, pos: "CDM", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p220566.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg", clb: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg", s: [66,80,86,84,87,85] },
+        { name: "Kane", rat: 90, pos: "ST", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p78830.png", ntn: "https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg", clb: "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_München_logo_%282017%29.svg", s: [69,93,84,83,49,83] }
+    ];
 
-        let allPlayers = [mainPlayer];
+    const labels = ["PAC", "SHO", "PAS", "DRI", "DEF", "PHY"];
+    const container = document.getElementById('app');
 
-        // Generating 499 Dummy Players to simulate your "500 players" request
-        for(let i = 0; i < 499; i++) {
-            allPlayers.push({
-                id: i+2,
-                name: `Player ${i+1}`,
-                rating: Math.floor(Math.random() * (99 - 75) + 75), // Random rating 75-99
-                pos: ["ST", "CM", "CB", "GK"][Math.floor(Math.random()*4)],
-                image: "https://via.placeholder.com/150/000000/FFFFFF/?text=Face", // Dummy face
-                nation: "https://via.placeholder.com/20?text=Flag",
-                club: "https://via.placeholder.com/20?text=Club",
-                stats: { 
-                    pac: Math.floor(Math.random() * 99), 
-                    sho: Math.floor(Math.random() * 99), 
-                    pas: Math.floor(Math.random() * 99), 
-                    dri: Math.floor(Math.random() * 99), 
-                    def: Math.floor(Math.random() * 99), 
-                    phy: Math.floor(Math.random() * 99) 
-                }
-            });
-        }
-
-        // 2. THE GENERATOR FUNCTION
-        const grid = document.getElementById('player-grid');
-
-        allPlayers.forEach(player => {
-            // Create the card container
-            const card = document.createElement('div');
-            card.classList.add('fut-card');
-
-            // Inject the HTML inside the card
-            card.innerHTML = `
-                <div class="decor-lines"></div>
-                
-                <div class="card-rating-pos">
-                    <span class="card-rating">${player.rating}</span>
-                    <span class="card-position">${player.pos}</span>
+    players.forEach(p => {
+        container.innerHTML += `
+            <div class="card-wrapper">
+                <div class="glass-texture"></div>
+                <div class="top-info">
+                    <div class="rating">${p.rat}</div>
+                    <div class="pos">${p.pos}</div>
                 </div>
-
-                <img src="${player.image}" alt="${player.name}" class="card-player-img" onerror="this.style.display='none'">
-
-                <div class="card-content">
-                    <div class="card-name">${player.name}</div>
-                    
-                    <div class="card-stats">
-                        <div class="stat-box"><span class="stat-value">${player.stats.pac}</span><span class="stat-label">PAC</span></div>
-                        <div class="stat-box"><span class="stat-value">${player.stats.sho}</span><span class="stat-label">SHO</span></div>
-                        <div class="stat-box"><span class="stat-value">${player.stats.pas}</span><span class="stat-label">PAS</span></div>
-                        <div class="stat-box"><span class="stat-value">${player.stats.dri}</span><span class="stat-label">DRI</span></div>
-                        <div class="stat-box"><span class="stat-value">${player.stats.def}</span><span class="stat-label">DEF</span></div>
-                        <div class="stat-box"><span class="stat-value">${player.stats.phy}</span><span class="stat-label">PHY</span></div>
-                    </div>
-
-                    <div class="card-bottom-icons">
-                        <img src="${player.nation}" class="icon-img" title="Nation">
-                        <img src="${player.club}" class="icon-img" title="Club">
-                    </div>
+                <div class="side-icons">
+                    <img src="${p.ntn}">
+                    <img src="${p.clb}">
                 </div>
-            `;
-
-            grid.appendChild(card);
-        });
-
-    </script>
+                <div class="playstyle-plus"></div>
+                <img class="player-render" src="${p.img}">
+                <div class="name-area"><div class="name">${p.name}</div></div>
+                <div class="stats-container">
+                    ${p.s.map((val, i) => `
+                        <div class="stat-item">
+                            <span class="stat-val">${val}</span>
+                            <span class="stat-lab">${labels[i]}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    });
+</script>
 </body>
 </html>
