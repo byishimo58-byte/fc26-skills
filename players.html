@@ -1,141 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FC 26 Cards</title>
-
+<title>FC26 Players Cards</title>
 <style>
-body{
-    background:#0d1421;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
+body {
+    background: #0b0b0b;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 50px;
+    font-family: 'Oswald', sans-serif;
 }
 
-/* CARD FRAME */
-.card{
-    width:260px;
-    height:390px;
-    border-radius:18px;
-    background:linear-gradient(180deg,#f8d24a 0%,#c89c28 100%);
-    position:relative;
-    box-shadow:0 15px 40px rgba(0,0,0,0.6);
-    padding:15px;
-    color:#111;
-    overflow:hidden;
+.card-wrapper {
+    position: relative;
+    width: 260px;
+    height: 380px;
+    background: linear-gradient(135deg, #7c1a1a 0%, #2b0505 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
+    border: 2px solid #f3df95;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    transition: transform 0.3s;
+}
+.card-wrapper:hover { transform: translateY(-10px) scale(1.02); }
+
+.glass-texture {
+    position: absolute;
+    inset: 0;
+    background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+    opacity: 0.1;
+    pointer-events: none;
 }
 
-/* TOP RATING + POSITION */
-.top{
-    display:flex;
-    justify-content:space-between;
-    font-weight:bold;
+.top-info {
+    position: absolute;
+    top: 40px;
+    left: 25px;
+    z-index: 10;
+    color: #f3df95;
+    text-align: center;
+}
+.rating { font-size: 50px; font-weight: 800; line-height: 0.8; }
+.pos { font-size: 20px; font-weight: 400; letter-spacing: 1px; }
+
+.side-icons {
+    position: absolute;
+    top: 110px;
+    left: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 10;
+}
+.side-icons img { width: 30px; height: auto; filter: drop-shadow(0 2px 4px black); }
+
+.player-render {
+    position: absolute;
+    top: 25px;
+    right: -10px;
+    width: 220px;
+    height: auto;
+    z-index: 5;
+    filter: drop-shadow(-10px 10px 10px rgba(0,0,0,0.5));
 }
 
-.rating{
-    font-size:42px;
+.name-area {
+    position: absolute;
+    bottom: 115px;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+}
+.name {
+    font-size: 30px;
+    font-weight: 700;
+    color: #f3df95;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px black;
 }
 
-.position{
-    font-size:20px;
-    margin-top:10px;
+.stats-container {
+    position: absolute;
+    bottom: 35px;
+    width: 85%;
+    left: 7.5%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    z-index: 10;
+    border-top: 1px solid rgba(243, 223, 149, 0.3);
+    padding-top: 10px;
 }
+.stat-item { display: flex; flex-direction: column; align-items: center; color: white; }
+.stat-val { font-weight: 700; font-size: 18px; color: #fff; }
+.stat-lab { font-size: 12px; color: #f3df95; }
 
-/* PLAYER IMAGE */
-.player-img{
-    position:absolute;
-    top:85px;
-    left:50%;
-    transform:translateX(-50%);
-    width:170px;
-    height:170px;
-    object-fit:cover;
-    filter:drop-shadow(0 5px 15px rgba(0,0,0,0.5));
-}
-
-/* PLAYER NAME */
-.name{
-    position:absolute;
-    bottom:150px;
-    width:100%;
-    text-align:center;
-    font-size:20px;
-    font-weight:bold;
-}
-
-/* STATS */
-.stats{
-    position:absolute;
-    bottom:55px;
-    width:100%;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    font-size:15px;
-    font-weight:bold;
-}
-
-.stats div{
-    padding:2px 25px;
-    display:flex;
-    justify-content:space-between;
-}
-
-/* CLUB + NATION */
-.badges{
-    position:absolute;
-    bottom:15px;
-    width:100%;
-    display:flex;
-    justify-content:center;
-    gap:15px;
-}
-
-.badges img{
-    width:30px;
-    height:30px;
-    object-fit:contain;
+.playstyle-plus {
+    position: absolute;
+    top: 155px;
+    left: 15px;
+    width: 35px;
+    height: 35px;
+    background: #d4af37;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    z-index: 11;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px #00ffff;
+    border: 1px solid white;
 }
 </style>
 </head>
-
 <body>
+<div id="app"></div>
 
-<div class="card">
+<script>
+const labels = ["PAC","SHO","PAS","DRI","DEF","PHY"];
+const players = [
+    { name: "Fermín", rat: 86, pos: "CM", img: "https://resources.premierleague.com/premierleague/photos/players/250x250/p492651.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg", clb: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg", s: [83,85,84,88,70,65] },
+    { name: "Mbappé", rat: 91, pos: "ST", img: "https://resources.premierleague.com/premierleague/photos/250x250/p244731.png", ntn: "https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg", clb: "https://upload.wikimedia.org/wikipedia/en/c/c5/Real_Madrid_CF.svg", s: [97,90,80,92,36,78] },
+    { name: "Haaland", rat: 91, pos: "ST", img: "https://resources.premierleague.com/premierleague/photos/250x250/p223094.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg", clb: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg", s: [89,93,66,80,45,88] },
+    { name: "Vini Jr", rat: 89, pos: "LW", img: "https://resources.premierleague.com/premierleague/photos/250x250/p246333.png", ntn: "https://upload.wikimedia.org/wikipedia/en/0/05/Flag_of_Brazil.svg", clb: "https://upload.wikimedia.org/wikipedia/en/c/c5/Real_Madrid_CF.svg", s: [95,82,81,90,29,68] },
+    { name: "Bellingham", rat: 90, pos: "CAM", img: "https://resources.premierleague.com/premierleague/photos/250x250/p460980.png", ntn: "https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg", clb: "https://upload.wikimedia.org/wikipedia/en/c/c5/Real_Madrid_CF.svg", s: [80,87,83,88,78,82] },
+    { name: "Salah", rat: 89, pos: "RW", img: "https://resources.premierleague.com/premierleague/photos/250x250/p118748.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Egypt.svg", clb: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg", s: [89,87,82,88,45,75] },
+    { name: "Van Dijk", rat: 89, pos: "CB", img: "https://resources.premierleague.com/premierleague/photos/250x250/p97032.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_the_Netherlands.svg", clb: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg", s: [78,60,71,72,89,86] },
+    { name: "De Bruyne", rat: 90, pos: "CM", img: "https://resources.premierleague.com/premierleague/photos/250x250/p61366.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Belgium.svg", clb: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg", s: [72,85,94,87,65,78] },
+    { name: "Rodri", rat: 91, pos: "CDM", img: "https://resources.premierleague.com/premierleague/photos/250x250/p220566.png", ntn: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg", clb: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg", s: [66,80,86,84,87,85] },
+    { name: "Kane", rat: 90, pos: "ST", img: "https://resources.premierleague.com/premierleague/photos/250x250/p78830.png", ntn: "https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg", clb: "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_München_logo_%282017%29.svg", s: [69,93,84,83,49,83] }
+];
 
-    <div class="top">
-        <div>
-            <div class="rating">91</div>
-            <div class="position">ST</div>
+const container = document.getElementById('app');
+
+players.forEach(p=>{
+    container.innerHTML += `
+    <div class="card-wrapper">
+        <div class="glass-texture"></div>
+        <div class="top-info">
+            <div class="rating">${p.rat}</div>
+            <div class="pos">${p.pos}</div>
+        </div>
+        <div class="side-icons">
+            <img src="${p.ntn}" alt="nation">
+            <img src="${p.clb}" alt="club">
+        </div>
+        <div class="playstyle-plus"></div>
+        <img class="player-render" src="${p.img}" alt="player">
+        <div class="name-area"><div class="name">${p.name}</div></div>
+        <div class="stats-container">
+            ${p.s.map((val,i)=>`
+                <div class="stat-item">
+                    <span class="stat-val">${val}</span>
+                    <span class="stat-lab">${labels[i]}</span>
+                </div>
+            `).join('')}
         </div>
     </div>
-
-    <!-- PLAYER PHOTO -->
-    <img class="player-img" src="images/mbappe.png" alt="Mbappe">
-
-    <!-- PLAYER NAME -->
-    <div class="name">Kylian Mbappé</div>
-
-    <!-- STATS -->
-    <div class="stats">
-        <div><span>PAC</span><span>96</span></div>
-        <div><span>SHO</span><span>88</span></div>
-        <div><span>PAS</span><span>81</span></div>
-        <div><span>DRI</span><span>95</span></div>
-        <div><span>DEF</span><span>38</span></div>
-        <div><span>PHY</span><span>76</span></div>
-    </div>
-
-    <!-- CLUB + COUNTRY -->
-    <div class="badges">
-        <img src="images/psg.png" alt="club">
-        <img src="images/france.png" alt="nation">
-    </div>
-
-</div>
-
+    `;
+});
+</script>
 </body>
 </html>
