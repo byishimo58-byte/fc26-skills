@@ -3,16 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FC26 Players</title>
+<title>FC26 Players - 500 Player Database</title>
 <style>
-body { font-family: Arial; background:#0f182c; color:white; text-align:center; margin:0; }
-nav { background:#08121f; padding:10px; display:flex; justify-content:center; }
-nav a { color:#00ffcc; margin:0 15px; text-decoration:none; font-weight:bold; }
-.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:20px; padding:20px; }
-.player-card { background:#0f182c; border-radius:12px; padding:12px; text-align:center; box-shadow:0 4px 10px rgba(0,255,204,0.25); border-top:4px solid #00ffcc; }
-.player-card img { width:100%; border-radius:8px; }
-.player-card h3 { margin:8px 0 4px 0; font-size:18px; }
-.player-card p { font-size:14px; color:#e0e0e0; margin:2px 0; }
+body { font-family: Arial; background:#0f182c; color:white; margin:0; text-align:center;}
+nav { background:#08121f; padding:10px; display:flex; justify-content:center; flex-wrap:wrap;}
+nav a { color:#00ffcc; margin:0 15px; text-decoration:none; font-weight:bold;}
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:15px; padding:20px;}
+.player-card { width:150px; height:220px; border-radius:12px; color:white; text-align:center; padding:8px; margin:10px auto; display:inline-block; box-shadow:0 4px 10px rgba(0,255,204,0.3); border-top:4px solid #00ffcc;}
+.player-card.gold { background: linear-gradient(to bottom,#FFD700,#FFC107);}
+.player-card.toty { background: linear-gradient(to bottom,#00FFFF,#00CCCC);}
+.player-card.icon { background: linear-gradient(to bottom,#FF4500,#FF6347);}
+.top-bar { display:flex; justify-content: space-between; font-weight:bold; font-size:14px;}
+.player-photo { width:100px; height:100px; border-radius:50%; margin:5px auto;}
+.name { font-size:16px; font-weight:bold; margin:5px 0;}
+.stars { color:#FFD700; font-size:14px; }
+.club-country img { width:20px; height:20px; margin:0 2px;}
 input, select { padding:10px; margin:10px; font-size:16px; border-radius:6px; border:none; }
 </style>
 </head>
@@ -27,48 +32,69 @@ input, select { padding:10px; margin:10px; font-size:16px; border-radius:6px; bo
   <a href="updates.html">Updates</a>
 </nav>
 
-<h1>FC26 Players</h1>
+<h1>FC26 Players Database</h1>
 <input type="text" id="search" placeholder="Search player...">
 <select id="filterPosition">
   <option value="">All Positions</option>
   <option value="ST">ST</option>
   <option value="CAM">CAM</option>
   <option value="GK">GK</option>
+  <option value="CM">CM</option>
+  <option value="LW">LW</option>
+  <option value="RW">RW</option>
 </select>
 
 <div class="grid" id="playersGrid"></div>
 
 <script>
-// Players data (standalone, each page has its own)
-const players = [
-  {name:"Kylian Mbappé", rating:91, position:"ST", club:"PSG", nationality:"France", card:"images/cards/mbappe_gold.png"},
-  {name:"Erling Haaland", rating:90, position:"ST", club:"Manchester City", nationality:"Norway", card:"images/cards/haaland_toty.png"},
-  {name:"Lionel Messi", rating:91, position:"RW", club:"Inter Miami", nationality:"Argentina", card:"images/cards/messi_icon.png"},
-  {name:"Kevin De Bruyne", rating:91, position:"CM", club:"Manchester City", nationality:"Belgium", card:"images/cards/debruyne_gold.png"},
-  {name:"Robert Lewandowski", rating:90, position:"ST", club:"Barcelona", nationality:"Poland", card:"images/cards/lewandowski_gold.png"}
-];
+// -------- 500 PLAYER PLACEHOLDERS --------
+const players = [];
+for(let i=1;i<=500;i++){
+  players.push({
+    name:"Player "+i,
+    rating:Math.floor(Math.random()*11)+80, // random rating 80-90
+    position:["ST","CAM","GK","CM","LW","RW"][Math.floor(Math.random()*6)],
+    type:["gold","toty","icon"][Math.floor(Math.random()*3)],
+    stars:Math.floor(Math.random()*5)+1,
+    club:"images/clubs/club"+((i%20)+1)+".png", // placeholder clubs 1-20
+    nation:"images/nations/nation"+((i%50)+1)+".png", // placeholder nations 1-50
+    photo:"images/cards/card"+i+".png" // placeholder card image
+  });
+}
 
-// Render players
+// -------- RENDER FUNCTION --------
 const grid = document.getElementById("playersGrid");
-function renderPlayers(list) {
-  grid.innerHTML = "";
-  list.forEach(p => {
+function renderPlayers(list){
+  grid.innerHTML="";
+  list.forEach(p=>{
     const div = document.createElement("div");
-    div.className = "player-card";
-    div.innerHTML = `<img src="${p.card}" alt="${p.name}"><h3>${p.name}</h3><p>${p.position} • ${p.rating}</p><p>${p.club}</p>`;
+    div.className = `player-card ${p.type}`;
+    div.innerHTML = `
+      <div class="top-bar">
+        <span class="rating">${p.rating}</span>
+        <span class="position">${p.position}</span>
+      </div>
+      <img src="${p.photo}" alt="${p.name}" class="player-photo">
+      <h3 class="name">${p.name}</h3>
+      <div class="stars">${"★".repeat(p.stars)}${"☆".repeat(5-p.stars)}</div>
+      <div class="club-country">
+        <img src="${p.club}" alt="club" class="club-logo">
+        <img src="${p.nation}" alt="nation" class="nation-logo">
+      </div>
+    `;
     grid.appendChild(div);
   });
 }
 renderPlayers(players);
 
-// Filter/search
-document.getElementById("search").addEventListener("input", e => {
+// -------- SEARCH AND FILTER --------
+document.getElementById("search").addEventListener("input", e=>{
   const term = e.target.value.toLowerCase();
-  renderPlayers(players.filter(p => p.name.toLowerCase().includes(term)));
+  renderPlayers(players.filter(p=>p.name.toLowerCase().includes(term)));
 });
-document.getElementById("filterPosition").addEventListener("change", e => {
+document.getElementById("filterPosition").addEventListener("change", e=>{
   const pos = e.target.value;
-  renderPlayers(pos ? players.filter(p => p.position === pos) : players);
+  renderPlayers(pos ? players.filter(p=>p.position===pos):players);
 });
 </script>
 
