@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Players - FC26</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FC26 Players Database</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -21,12 +22,42 @@
 <div class="container">
 <h2>Players Database</h2>
 
+<div class="filters">
 <input type="text" id="search" placeholder="Search player...">
 <select id="filterPosition">
 <option value="">All Positions</option>
-<option value="ST">ST</option>
+<option value="GK">GK</option>
+<option value="CB">CB</option>
+<option value="LB">LB</option>
+<option value="RB">RB</option>
+<option value="CDM">CDM</option>
+<option value="CM">CM</option>
+<option value="LM">LM</option>
+<option value="RM">RM</option>
 <option value="CAM">CAM</option>
+<option value="LW">LW</option>
+<option value="RW">RW</option>
+<option value="ST">ST</option>
 </select>
+
+<select id="filterLeague">
+<option value="">All Leagues</option>
+<option value="Premier League">Premier League</option>
+<option value="Ligue 1">Ligue 1</option>
+<option value="La Liga">La Liga</option>
+<option value="Bundesliga">Bundesliga</option>
+<option value="Serie A">Serie A</option>
+<option value="Icons">Icons</option>
+</select>
+
+<select id="filterType">
+<option value="">All Types</option>
+<option value="Gold">Gold</option>
+<option value="Silver">Silver</option>
+<option value="Bronze">Bronze</option>
+<option value="Icon">Icon</option>
+</select>
+</div>
 
 <div id="playersGrid" class="grid"></div>
 
