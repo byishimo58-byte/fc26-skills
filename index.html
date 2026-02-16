@@ -1,41 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FC26 Hub</title>
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>FC26 Match Intelligence</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="hero">
-    <h1>⚽ FC26 HUB</h1>
-    <p>All Players, Skills, Squad Builder, and Weekly Updates</p>
-    <div class="hero-buttons">
-        <a href="players.html" class="btn-neon">Players</a>
-        <a href="skills.html" class="btn-neon">Skills</a>
-        <a href="compare.html" class="btn-neon">Compare</a>
-        <a href="squad.html" class="btn-neon">Squad Builder</a>
-        <a href="updates.html" class="btn-neon">Updates</a>
-    </div>
-</header>
+    <h1>FC26 Match Intelligence System</h1>
 
-<section class="featured">
-    <h2>Featured Players</h2>
-    <div class="featured-grid" id="featuredPlayers"></div>
-</section>
+    <!-- Formation -->
+    <label>Formation:</label>
+    <select id="formation">
+        <option value="4-3-3">4-3-3</option>
+        <option value="4-2-3-1">4-2-3-1</option>
+        <option value="4-4-2">4-4-2</option>
+        <option value="3-5-2">3-5-2</option>
+        <option value="5-3-2">5-3-2</option>
+    </select>
 
-<script src="js/data/players1.js"></script>
-<script src="js/players.js"></script>
-<script>
-    const featured = document.getElementById("featuredPlayers");
-    players1.slice(0,6).forEach(p=>{
-        const div = document.createElement("div");
-        div.classList.add("player-card");
-        div.innerHTML = `<img src="${p.card}" alt="${p.name}">
-                         <h3>${p.name}</h3>
-                         <p>Rating: ${p.rating} | ${p.position}</p>`;
-        featured.appendChild(div);
-    });
-</script>
+    <!-- Problems -->
+    <fieldset>
+        <legend>Problems:</legend>
+        <label><input type="checkbox" value="conceding_counters"> Conceding counters</label>
+        <label><input type="checkbox" value="midfield_overrun"> Midfield overrun</label>
+        <label><input type="checkbox" value="cant_break_low_block"> Can't break low block</label>
+        <label><input type="checkbox" value="strikers_isolated"> Strikers isolated</label>
+        <label><input type="checkbox" value="fullbacks_exposed"> Fullbacks exposed</label>
+        <label><input type="checkbox" value="defense_too_deep"> Defense too deep</label>
+        <label><input type="checkbox" value="slow_buildup"> Slow buildup</label>
+        <label><input type="checkbox" value="not_enough_chances"> Not enough chances</label>
+    </fieldset>
+
+    <!-- Playstyle -->
+    <label>Playstyle:</label>
+    <select id="playstyle">
+        <option value="possession">Possession</option>
+        <option value="counter_attack">Counter Attack</option>
+        <option value="high_press">High Press</option>
+        <option value="balanced">Balanced</option>
+    </select>
+
+    <!-- Archetypes -->
+    <fieldset>
+        <legend>Player Archetypes:</legend>
+        <label><input type="checkbox" value="pace_attackers"> Pace-heavy attackers</label>
+        <label><input type="checkbox" value="technical_midfielders"> Technical midfielders</label>
+        <label><input type="checkbox" value="physical_defenders"> Physical defenders</label>
+        <label><input type="checkbox" value="target_man_striker"> Target man striker</label>
+        <label><input type="checkbox" value="creative_playmaker"> Creative playmaker</label>
+    </fieldset>
+
+    <button id="analyzeBtn">Analyze</button>
+
+    <!-- Output -->
+    <div id="dashboard"></div>
+
+    <script src="engine.js"></script>
+    <script src="ui.js"></script> <!-- We'll create UI interaction next -->
 </body>
 </html>
