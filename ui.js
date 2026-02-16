@@ -1,29 +1,58 @@
 document.getElementById("analyzeBtn").addEventListener("click", function(){
-    const formation = document.getElementById("formation").value;
-
-    const selectedProblems = Array.from(document.querySelectorAll("input[type=checkbox][value^='conceding_counters'], input[type=checkbox][value^='midfield_overrun'], input[type=checkbox][value^='cant_break_low_block'], input[type=checkbox][value^='strikers_isolated'], input[type=checkbox][value^='fullbacks_exposed'], input[type=checkbox][value^='defense_too_deep'], input[type=checkbox][value^='slow_buildup'], input[type=checkbox][value^='not_enough_chances']"))
+    const selectedProblems = Array.from(document.querySelectorAll("fieldset input[type=checkbox]"))
         .filter(cb => cb.checked)
         .map(cb => cb.value);
 
     const playstyle = document.getElementById("playstyle").value;
 
-    const selectedArchetypes = Array.from(document.querySelectorAll("input[type=checkbox][value^='pace_attackers'], input[type=checkbox][value^='technical_midfielders'], input[type=checkbox][value^='physical_defenders'], input[type=checkbox][value^='target_man_striker'], input[type=checkbox][value^='creative_playmaker']"))
+    const selectedArchetypes = Array.from(document.querySelectorAll("fieldset input[type=checkbox]"))
         .filter(cb => cb.checked)
         .map(cb => cb.value);
 
     const result = calculateTacticalSolution(selectedProblems, playstyle, selectedArchetypes);
 
-    // Display results
-    let html = "<h2>Tactical Dashboard</h2>";
-    html += `<p><strong>Depth:</strong> ${result.depth}</p>`;
-    html += `<p><strong>Width:</strong> ${result.width}</p>`;
-    html += `<p><strong>Build-up Speed:</strong> ${result.buildUpSpeed}</p>`;
-    html += `<p><strong>Attack Width:</strong> ${result.attackWidth}</p>`;
-    html += `<p><strong>Players in Box:</strong> ${result.playersInBox}</p>`;
-    html += `<p><strong>CDM Role:</strong> ${result.CDM}</p>`;
-    html += `<p><strong>Fullback Role:</strong> ${result.fullback}</p>`;
-    html += `<p><strong>CAM Role:</strong> ${result.CAM}</p>`;
-    html += `<p><strong>Striker Role:</strong> ${result.striker}</p>`;
+    let html = "";
+
+    const stats = [
+        {label:"Depth", value:result.depth},
+        {label:"Width", value:result.width},
+        {label:"Build-up Speed", value:result.buildUpSpeed},
+        {label:"Attack Width", value:result.attackWidth},
+        {label:"Players in Box", value:result.playersInBox*20}
+    ];
+
+    stats.forEach(stat => {
+        html += `
+        <div class="stat-bar">
+            <div class="stat-label">${stat.label}: ${stat.value}</div>
+            <div class="bar-container">
+                <div class="bar-fill" style="width:${stat.value}%;"></div>
+            </div>
+        </div>
+        `;
+    });
+
+    const roles = [
+        {label:"CDM Role", value:result.CDM},
+        {label:"Fullback Role", value:result.fullback},
+        {label:"CAM Role", value:result.CAM},
+        {label:"Striker Role", value:result.striker}
+    ];
+
+    roles.forEach(r => {
+        html += `<div class="stat-bar"><div class="stat-label">${r.label}: ${r.value}</div></div>`;
+    });
+
+    let explanation = "Tactical Analysis: ";
+    if(selectedProblems.length){
+        explanation += "Detected problems → " + selectedProblems.join(", ") + ". ";
+    }
+    if(selectedArchetypes.length){
+        explanation += "Player types → " + selectedArchetypes.join(", ") + ". ";
+    }
+    explanation += `Recommended formation adjustments for ${playstyle} style applied.`;
+
+    html += `<div class="explanation">${explanation}</div>`;
 
     document.getElementById("dashboard").innerHTML = html;
 });
