@@ -1,81 +1,33 @@
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-    color: white;
-    text-align: center;
+    background: #0b0b0b;
+    color: #fff;
+    padding: 30px;
 }
 
-.hero {
-    padding: 60px 20px;
-    background: linear-gradient(135deg,#203a43,#0f2027);
-}
+h1 { text-align: center; color: #f3df95; }
 
-.hero h1 {
-    font-size: 48px;
-    text-shadow: 0 0 12px #00ffcc;
-}
-
-.hero p {
-    font-size: 20px;
-    margin-bottom: 20px;
-}
-
-.hero-buttons .btn-neon {
-    display: inline-block;
-    padding: 15px 30px;
-    margin: 10px;
-    background: #00ffcc;
-    color: black;
-    font-weight: bold;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.hero-buttons .btn-neon:hover {
-    background: #00ccaa;
-}
-
-.player-card {
-    display: inline-block;
-    margin: 10px;
-    background: #111;
+fieldset {
+    margin: 15px 0;
+    border: 1px solid #f3df95;
     padding: 10px;
-    border-radius: 12px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 0 10px #00ffcc;
-    width: 140px;
 }
 
-.player-card img {
-    border-radius: 12px;
-    border: 2px solid gold;
-}
+label { display: block; margin: 5px 0; }
 
-.featured-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-/* Skills page */
-.skills-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.skills-container .player-card iframe {
-    margin-top: 5px;
-}
-
-/* Search bars */
-input[type="text"], select {
-    padding: 8px;
-    margin: 10px;
-    border-radius: 5px;
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #f3df95;
     border: none;
-    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#dashboard {
+    margin-top: 30px;
+    padding: 20px;
+    border: 2px solid #f3df95;
+    background: #1a1a1a;
 }
