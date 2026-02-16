@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FC26 Skill Library – Part 3</title>
+<style>
+body { background: #0b0b0b; color: #fff; font-family: Arial, sans-serif; padding: 20px; }
+h1 { text-align: center; color: #f3df95; }
+#searchInput { display: block; margin: 10px auto 20px auto; padding: 10px; width: 60%; font-size: 16px; border-radius: 5px; border: 1px solid #f3df95; background: #1a1a1a; color: #fff; }
+#filterButtons { text-align: center; margin-bottom: 20px; }
+.filter-btn { background: #222; color: #fff; border: 1px solid #f3df95; margin: 3px; padding: 7px 15px; cursor: pointer; border-radius: 5px; font-weight: bold; }
+.filter-btn.active { background: #f3df95; color: #000; }
+#skillContainer { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 15px; }
+.skill-card { background: #1a1a1a; border: 1px solid #f3df95; padding: 10px; border-radius: 10px; cursor: pointer; transition: transform 0.2s; }
+.skill-card:hover { transform: scale(1.05); }
+.skill-card h3 { margin: 0 0 5px 0; color: #f3df95; }
+.skill-card p { margin: 3px 0; font-size: 14px; color: #ccc; }
+.modal { display: none; position: fixed; z-index: 10; left:0; top:0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow: auto; }
+.modal-content { background: #1a1a1a; margin: 50px auto; padding: 20px; border: 2px solid #f3df95; width: 60%; border-radius: 10px; position: relative; }
+.close { color: #f3df95; position: absolute; top:10px; right:15px; font-size:28px; font-weight:bold; cursor:pointer; }
+#modalMedia img, #modalMedia video { max-width: 100%; margin-top: 10px; border-radius: 5px; }
+</style>
+</head>
+<body>
+
+<h1>FC26 Skill Library – Part 3</h1>
+
+<input type="text" id="searchInput" placeholder="Search skill..." />
+
+<div id="filterButtons">
+    <button data-category="All" class="filter-btn active">All</button>
+    <button data-category="Defending" class="filter-btn">Defending</button>
+    <button data-category="Tackling" class="filter-btn">Tackling</button>
+    <button data-category="Interceptions" class="filter-btn">Interceptions</button>
+    <button data-category="Goalkeeping" class="filter-btn">Goalkeeping</button>
+</div>
+
+<div id="skillContainer"></div>
+
+<div id="skillModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalName"></h2>
+        <p><strong>Category:</strong> <span id="modalCategory"></span></p>
+        <p><strong>Execution:</strong> <span id="modalExecution"></span></p>
+        <p><strong>Difficulty:</strong> <span id="modalDifficulty"></span></p>
+        <p id="modalTips"></p>
+        <div id="modalMedia"></div>
+    </div>
+</div>
+
+<script>
+// Part 3: Defensive Control + Final Batch
+const skills3 = [
+    { name:"Slide Tackle", category:"Tackling", execution:"Press Circle/B while moving", difficulty:"★★★☆☆", tips:"Use carefully to avoid fouls.", media:"https://media.giphy.com/media/3o6ZsZWyX1kXq6KZq0/giphy.gif" },
+    { name:"Standing Tackle", category:"Tackling", execution:"Press Circle/B", difficulty:"★★☆☆☆", tips:"Quickly dispossess opponent.", media:"https://media.giphy.com/media/l0HlKXQzO0p4O6Yuk/giphy.gif" },
+    { name:"Jockey", category:"Defending", execution:"Hold L2/LT + movement", difficulty:"★★☆☆☆", tips:"Maintain defensive stance and track player.", media:"https://media.giphy.com/media/xUPGcl3ijlPWaH2J5i/giphy.gif" },
+    { name:"Interception", category:"Interceptions", execution:"Move into path + press tackle", difficulty:"★★★☆☆", tips:"Cut passing lanes effectively.", media:"https://media.giphy.com/media/l41lFw057lAJQMwg0/giphy.gif" },
+    { name:"Goalkeeper Save", category:"Goalkeeping", execution:"Automatic/Manual", difficulty:"★★★★☆", tips:"Use reflex and positioning.", media:"https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif" },
+    { name:"Clearance", category:"Defending", execution:"Shoot button in defense", difficulty:"★★☆☆☆", tips:"Clear danger quickly.", media:"https://media.giphy.com/media/3o7abB06u9bNzA8lu8/giphy.gif" },
+    { name:"Pressure", category:"Defending", execution:"Hold R1/RB", difficulty:"★★★☆☆", tips:"Close down attacker quickly.", media:"https://media.giphy.com/media/l3vR0gbJKbY9K1l3K/giphy.gif" },
+    { name:"Counter Attack", category:"Movement", execution:"Quick sprint + pass", difficulty:"★★★☆☆", tips:"Exploit space after regain.", media:"https://media.giphy.com/media/3o6ZsYWHTT9eYpFOV2/giphy.gif" },
+    { name:"Slide Intercept", category:"Interceptions", execution:"Slide + move into lane", difficulty:"★★★★☆", tips:"Perfect for fast passes.", media:"https://media.giphy.com/media/l0HlSNOxJB956qwfK/giphy.gif" },
+    { name:"Defensive Block", category:"Defending", execution:"Hold position + L2/LT", difficulty:"★★★☆☆", tips:"Block shots effectively.", media:"https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif" }
+];
+
+// Display skills
+const container = document.getElementById("skillContainer");
+function displaySkills(skillList){
+    container.innerHTML = "";
+    skillList.forEach(s => {
+        const card = document.createElement("div");
+        card.className = "skill-card";
+        card.innerHTML = `<h3>${s.name}</h3><p>${s.category}</p><p>${s.execution}</p>`;
+        card.addEventListener("click", ()=>{
+            modal.style.display = "block";
+            modalName.textContent = s.name;
+            modalCategory.textContent = s.category;
+            modalExecution.textContent = s.execution;
+            modalDifficulty.textContent = s.difficulty;
+            modalTips.textContent = s.tips;
+            modalMedia.innerHTML = `<img src="${s.media}" alt="${s.name}">`;
+        });
+        container.appendChild(card);
+    });
+}
+displaySkills(skills3);
+
+// Search
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input", ()=>{
+    const term = searchInput.value.toLowerCase();
+    const filtered = skills3.filter(s => s.name.toLowerCase().includes(term));
+    displaySkills(filtered);
+});
+
+// Filter buttons
+const filterButtons = document.querySelectorAll(".filter-btn");
+filterButtons.forEach(btn => {
+    btn.addEventListener("click", ()=>{
+        filterButtons.forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+        const category = btn.dataset.category;
+        if(category==="All"){ displaySkills(skills3); } 
+        else { displaySkills(skills3.filter(s=>s.category===category)); }
+    });
+});
+
+// Modal
+const modal = document.getElementById("skillModal");
+document.querySelector(".close").addEventListener("click", ()=> modal.style.display="none");
+window.addEventListener("click", e=>{ if(e.target===modal) modal.style.display="none"; });
+</script>
+</body>
+</html>
