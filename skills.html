@@ -2,14 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>FC26 Skill Library</title>
+<title>FC26 Skill Library – Part 1</title>
 <style>
-body {
-    background: #0b0b0b;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-}
+body { background: #0b0b0b; color: #fff; font-family: Arial, sans-serif; padding: 20px; }
 h1 { text-align: center; color: #f3df95; }
 #searchInput { display: block; margin: 10px auto 20px auto; padding: 10px; width: 60%; font-size: 16px; border-radius: 5px; border: 1px solid #f3df95; background: #1a1a1a; color: #fff; }
 #filterButtons { text-align: center; margin-bottom: 20px; }
@@ -20,7 +15,6 @@ h1 { text-align: center; color: #f3df95; }
 .skill-card:hover { transform: scale(1.05); }
 .skill-card h3 { margin: 0 0 5px 0; color: #f3df95; }
 .skill-card p { margin: 3px 0; font-size: 14px; color: #ccc; }
-/* Modal */
 .modal { display: none; position: fixed; z-index: 10; left:0; top:0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow: auto; }
 .modal-content { background: #1a1a1a; margin: 50px auto; padding: 20px; border: 2px solid #f3df95; width: 60%; border-radius: 10px; position: relative; }
 .close { color: #f3df95; position: absolute; top:10px; right:15px; font-size:28px; font-weight:bold; cursor:pointer; }
@@ -29,7 +23,7 @@ h1 { text-align: center; color: #f3df95; }
 </head>
 <body>
 
-<h1>FC26 Skill Library</h1>
+<h1>FC26 Skill Library – Part 1</h1>
 
 <input type="text" id="searchInput" placeholder="Search skill..." />
 
@@ -39,6 +33,7 @@ h1 { text-align: center; color: #f3df95; }
     <button data-category="Turns" class="filter-btn">Turns</button>
     <button data-category="Flicks" class="filter-btn">Flicks</button>
     <button data-category="Ball Control" class="filter-btn">Ball Control</button>
+    <button data-category="Trigger" class="filter-btn">Trigger</button>
 </div>
 
 <div id="skillContainer"></div>
@@ -56,7 +51,7 @@ h1 { text-align: center; color: #f3df95; }
 </div>
 
 <script>
-// Full Skill Data
+// Part 1: Beat Defender + Create Space
 const skills = [
     { name:"Elastico", category:"Feints", execution:"R1 + △ (PS) / RB + Y (XB)", difficulty:"★★★★★", tips:"Use to beat aggressive defenders on the wing.", media:"https://media.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.gif" },
     { name:"Heel to Heel", category:"Feints", execution:"R1 + △ forward-backward (PS) / RB + Y forward-backward (XB)", difficulty:"★★★☆☆", tips:"Quickly change direction to lose defender.", media:"https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" },
@@ -67,7 +62,9 @@ const skills = [
     { name:"Drag Back", category:"Ball Control", execution:"Right Stick down then up", difficulty:"★★★☆☆", tips:"Quick turn to escape tight marking.", media:"https://media.giphy.com/media/l3vR0gbJKbY9K1l3K/giphy.gif" },
     { name:"Roulette Double", category:"Turns", execution:"Rotate Right Stick 720°", difficulty:"★★★★★", tips:"Advanced spin to bypass multiple defenders.", media:"https://media.giphy.com/media/l0HlSNOxJB956qwfK/giphy.gif" },
     { name:"Sombrero Flick", category:"Flicks", execution:"Flick Right Stick up twice", difficulty:"★★★★☆", tips:"Pop ball over defender's head.", media:"https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif" },
-    { name:"Body Feint", category:"Feints", execution:"Right Stick left/right", difficulty:"★★☆☆☆", tips:"Shift body to trick defender.", media:"https://media.giphy.com/media/xUPGcl3ijlPWaH2J5i/giphy.gif" }
+    { name:"Body Feint", category:"Feints", execution:"Right Stick left/right", difficulty:"★★☆☆☆", tips:"Shift body to trick defender.", media:"https://media.giphy.com/media/xUPGcl3ijlPWaH2J5i/giphy.gif" },
+    { name:"Shield & Turn", category:"Ball Control", execution:"Hold L2/LT + Right Stick turn", difficulty:"★★★☆☆", tips:"Protect ball and change direction quickly.", media:"https://media.giphy.com/media/l0MYGb1LuZ3n7dRnO/giphy.gif" },
+    { name:"Inside Cut", category:"Trigger", execution:"Sprint + Right Stick inside", difficulty:"★★★☆☆", tips:"Cut inside to beat narrow defenders.", media:"https://media.giphy.com/media/3o6ZsYWHTT9eYpFOV2/giphy.gif" }
 ];
 
 // Display skills
